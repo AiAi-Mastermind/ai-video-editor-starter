@@ -8,7 +8,7 @@ Do this whether you use Codex or Claude Code. You need Node.js 22 or newer, ffmp
 
 Download Node.js 22 or newer from [nodejs.org](https://nodejs.org/) and run the installer. Success looks like: the installer says the installation completed successfully.
 
-Open [brew.sh](https://brew.sh/) in your web browser and copy the Homebrew installation line shown there. Open the Terminal app on Mac, paste that line, and press Enter. When it finishes, Terminal shows two or three lines that begin with the words Next steps. Paste each of those lines and press Enter.
+Open [brew.sh](https://brew.sh/) in your web browser and copy the Homebrew installation line shown there. Open the Terminal app on Mac, paste that line, and press Enter. When it finishes, Terminal shows a heading that says Next steps with two or three commands under it. Paste each of those commands, one at a time, and press Enter.
 
 Then paste this line and press Enter:
 
