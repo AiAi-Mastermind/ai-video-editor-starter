@@ -29,16 +29,16 @@ Default to no HeyGen opening clip.
 # Steps
 
 1. Complete the READ and CHECK phases in `AGENTS.md`.
-2. Run the brand interview if any `[FILL]` marker remains.
+2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
 3. Run `bash scripts/check-setup.sh`.
-4. Stop and use `SETUP.md` if ElevenLabs is disconnected.
-5. Confirm HyperFrames and ffmpeg answer.
+4. Stop and use `SETUP.md` if HyperFrames or ffmpeg is unavailable.
+5. Treat ElevenLabs as an optional transcription fallback and HeyGen as optional for the hook clip. Do not stop when either optional tool is unavailable.
 6. List candidate files without opening ignored secrets.
 7. Select one source recording.
 8. Screen its title and transcript for customer details.
 9. Never copy unsafe details into notes, captions, or file names.
-10. Create `output/drafts/<date>-shorts-from-recording/`.
-11. Transcribe with `hyperframes init --video <file> --non-interactive`.
+10. Create and transcribe into the draft project with `hyperframes init output/drafts/<date>-shorts-from-recording --video <file> --non-interactive`.
+11. The generated transcript file lands inside `output/drafts/<date>-shorts-from-recording/`. Convert that generated transcript into `transcript.md` in the draft root.
 12. If that path fails, use ElevenLabs speech to text.
 13. Save the cleaned transcript as `transcript.md`.
 14. Do not invent additional HyperFrames flags.
@@ -109,7 +109,7 @@ Write these in `output/drafts/<date>-shorts-from-recording/`:
 - Never include customer details in transcripts, notes, captions, or names.
 - Never name a carrier or contracted company.
 - Never publish, post, upload, or send a result.
-- Never expose `.env`, keys, tokens, or IDs.
+- Never expose a key, token, or the contents of `.env`.
 - Never clone another person without written consent.
 - Never add another tool, account, or paid service without asking.
 - Never generate a full paid clip before a 10-second test or without the required credit estimate.

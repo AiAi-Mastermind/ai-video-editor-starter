@@ -27,11 +27,11 @@ Never invent a missing topic, clone brief, or recording.
 # Steps
 
 1. Complete the READ phase from `AGENTS.md`.
-2. Run the brand interview if any `[FILL]` marker remains.
+2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
 3. Run `bash scripts/check-setup.sh` once for the full batch.
-4. Report whether HeyGen, ElevenLabs, and HyperFrames answer.
-5. Stop if HeyGen or ElevenLabs is disconnected.
-6. Use `SETUP.md` to explain the next connection step.
+4. Determine which assignments have inputs and include only those assignments.
+5. Require exactly the tools each included assignment names in the CHECK table in `AGENTS.md`.
+6. If a required tool is unavailable, use `SETUP.md` to explain the next connection step and stop that assignment. Do not stop for a tool that is optional for every included assignment.
 7. Screen the whole weekly brief for customer details.
 8. Screen it for carrier and contracted company names.
 10. Offer anonymized wording when needed.
@@ -99,7 +99,7 @@ Write within `output/drafts/<date>-weekly/`:
 - Never include customer details or identifying stories.
 - Never name a carrier or contracted company.
 - Never publish, post, upload, send, or approve automatically.
-- Never expose `.env`, a key, token, voice ID, or avatar ID.
+- Never expose a key, token, or the contents of `.env`.
 - Never clone another person without written consent.
 - Never add another tool, account, or paid service without asking.
 - Never run a long paid generation without a 10-second test and the required credit estimate.

@@ -20,7 +20,7 @@ Read these files silently:
 - `.env`, only through the setup script. Never display it.
 
 Ask no question unless a connection needs the member to sign in.
-The default is to stop when HeyGen or ElevenLabs does not answer.
+The default is to stop when HeyGen, ElevenLabs, or HyperFrames does not answer.
 Do not run the brand interview because this check is not video work.
 
 # Steps
@@ -30,11 +30,11 @@ Do not run the brand interview because this check is not video work.
 3. If `.env` is missing, point the member to `SETUP.md` and stop.
 4. If a required value is missing, name only the missing key.
 5. Confirm the ElevenLabs signed-in connection is available.
-6. Use the ElevenLabs connection for a 5-second speech test.
+6. Use the ElevenLabs connection for a 10-second speech test.
 7. Use the voice ID referenced by `.env`.
 8. Use this exact speech: "Your AI video editor is connected."
 9. Save the test as `output/desk-check/<date>-voice-test.mp3`.
-10. This 5-second test also satisfies the short-test safety rule.
+10. Make the speech file 10 seconds long so it satisfies the short-test safety rule.
 11. Record the known or estimated ElevenLabs credit use.
 12. Do not reveal the voice ID in the report.
 13. Confirm the HeyGen signed-in connection is available.
@@ -47,8 +47,8 @@ Do not run the brand interview because this check is not video work.
 20. Do not install it without the member's request.
 21. Treat Whisper as optional.
 22. Treat ffmpeg as required for assignments 3 and weekly work.
-23. If HeyGen or ElevenLabs is disconnected, explain the next sign-in step.
-24. Stop before video work when either connection is unavailable.
+23. If HeyGen, ElevenLabs, or HyperFrames is disconnected, explain the next setup step.
+24. Stop before video work when any required tool is unavailable.
 25. Write `output/desk-check/<date>.md`.
 26. Start the report with exactly three status lines.
 27. Use `HeyGen: CONNECTED` or `HeyGen: NOT CONNECTED`.
@@ -73,7 +73,7 @@ Do not put IDs or keys into either file.
 
 - [ ] The report begins with three clear status lines.
 - [ ] No key, token, voice ID, or avatar ID is shown.
-- [ ] The 5-second speech used the exact approved sentence.
+- [ ] The 10-second speech used the exact approved sentence.
 - [ ] HeyGen listed avatars and the chosen avatar was confirmed.
 - [ ] HyperFrames version was checked.
 - [ ] Missing setup steps point to `SETUP.md`.

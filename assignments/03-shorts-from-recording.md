@@ -17,4 +17,4 @@ Drop one recording into `input/recordings/`, then tell the agent to run assignme
 - Optional theme to favor:
 - Add a 3-second clone hook, yes or no:
 
-If the face field is blank, the agent uses a center crop. If the choice field is blank, the agent uses the top three clips.
+If the face field is blank, the agent uses a center crop, which means keeping the middle of the picture. If you do not choose clips, the agent picks the top three.

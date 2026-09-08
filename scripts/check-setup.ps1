@@ -1,13 +1,30 @@
 # This check never prints private values and always finishes successfully.
 $ProjectDir = Split-Path -Parent $PSScriptRoot
 $EnvFile = Join-Path $ProjectDir ".env"
+$ExpectedNames = @(
+    "ELEVENLABS_API_KEY",
+    "ELEVENLABS_VOICE_ID",
+    "HEYGEN_AVATAR_ID",
+    "HEYGEN_API_KEY",
+    "BRAND_NAME",
+    "DEFAULT_OUTPUT_SIZES",
+    "TEST_CLIP_SECONDS"
+)
+$PresentNames = @{}
+foreach ($Name in $ExpectedNames) {
+    $PresentNames[$Name] = $false
+}
+
+Write-Output "Local prerequisites"
 
 if (Test-Path $EnvFile) {
     Get-Content $EnvFile | ForEach-Object {
-        $Line = $_.Trim()
-        if ($Line -and -not $Line.StartsWith("#") -and $Line.Contains("=")) {
-            $Parts = $Line.Split("=", 2)
-            [Environment]::SetEnvironmentVariable($Parts[0].Trim(), $Parts[1].Trim(), "Process")
+        $Separator = $_.IndexOf("=")
+        if ($Separator -gt 0) {
+            $Name = $_.Substring(0, $Separator).Trim()
+            if ($PresentNames.ContainsKey($Name) -and -not [string]::IsNullOrWhiteSpace($_.Substring($Separator + 1))) {
+                $PresentNames[$Name] = $true
+            }
         }
     }
     Write-Output "Environment file: FOUND"
@@ -23,38 +40,21 @@ function Test-Command($Name, $DisplayName) {
     }
 }
 
-function Test-Key($Name) {
-    $Value = [Environment]::GetEnvironmentVariable($Name, "Process")
-    if ([string]::IsNullOrWhiteSpace($Value)) {
-        Write-Output "${Name}: MISSING"
-    } else {
-        Write-Output "${Name}: PRESENT"
-    }
-}
-
 Test-Command "node" "node"
 Test-Command "npm" "npm"
 Test-Command "ffmpeg" "ffmpeg"
 Test-Command "hyperframes" "hyperframes"
 Test-Command "whisper" "whisper (optional)"
-Test-Key "ELEVENLABS_API_KEY"
-Test-Key "ELEVENLABS_VOICE_ID"
-Test-Key "HEYGEN_AVATAR_ID"
-Test-Key "HEYGEN_API_KEY"
-Test-Key "BRAND_NAME"
-Test-Key "DEFAULT_OUTPUT_SIZES"
-Test-Key "TEST_CLIP_SECONDS"
 
-$ApiKey = [Environment]::GetEnvironmentVariable("ELEVENLABS_API_KEY", "Process")
-if (-not [string]::IsNullOrWhiteSpace($ApiKey)) {
-    try {
-        Invoke-WebRequest -Uri "https://api.elevenlabs.io/v1/user" -Headers @{"xi-api-key" = $ApiKey} -UseBasicParsing | Out-Null
-        Write-Output "ElevenLabs key works"
-    } catch {
-        Write-Output "ElevenLabs key rejected"
+foreach ($Name in $ExpectedNames) {
+    if ($PresentNames[$Name]) {
+        Write-Output "${Name}: PRESENT"
+    } elseif ($Name -eq "HEYGEN_API_KEY") {
+        Write-Output "${Name}: OPTIONAL / NOT SET"
+    } else {
+        Write-Output "${Name}: MISSING"
     }
-} else {
-    Write-Output "ElevenLabs key check: SKIPPED"
 }
 
+Write-Output "Connections to HeyGen and ElevenLabs are tested by the desk-check skill, not by this script."
 exit 0

@@ -2,6 +2,8 @@
 
 ## Sample brief
 
+Use `brand/sample-brand-kit.md` for this practice run.
+
 - Business name: Sunrise Family Bakery
 - Owner: Dana
 - What it sells: Custom cakes and weekday breakfast boxes

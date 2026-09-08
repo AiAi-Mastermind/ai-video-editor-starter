@@ -20,8 +20,6 @@ Claude Code is a fully supported alternative agent. Its own plan cost is separat
 4. Tell your agent, "Read AGENTS.md and run the desk check."
 5. When setup passes, tell it, "Run assignment 1."
 
-On Mac, make the checks runnable once with `chmod +x scripts/check-setup.sh scripts/sync-skills.sh`.
-
 ## Assignments
 
 - Assignment 0, check that your tools and private values are ready.
@@ -47,7 +45,7 @@ On Mac, make the checks runnable once with `chmod +x scripts/check-setup.sh scri
 
 ## Where your videos go
 
-New work always goes to `output/drafts/`. Only a person can move a file to `output/approved/`. A person posts it, then may record it in `output/posted/`.
+New work always goes to `output/drafts/`. The agent may COPY a draft to `output/approved/` only after the member types the word approved in that session. The draft stays in `output/drafts/`. A person posts it.
 
 ## Course
 

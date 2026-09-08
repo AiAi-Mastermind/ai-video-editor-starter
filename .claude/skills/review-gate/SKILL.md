@@ -7,7 +7,7 @@ description: Use when the member says "review this draft," names a draft folder,
 
 Give a named draft one final safety and quality review.
 Show the member a clear human checklist.
-Move files to approved only after the exact human decision in this session.
+Copy files to approved only after the exact human decision in this session.
 
 # Inputs
 
@@ -27,7 +27,7 @@ Do not ask more than three questions.
 
 # Steps
 
-1. Confirm the target is inside `output/drafts/`.
+1. Use no setup or connection tools. Confirm the target is inside `output/drafts/`.
 2. Never review a broad path or unrelated folder.
 3. Read the folder README and listed files.
 4. Re-check every script and visible caption for client names.
@@ -63,7 +63,7 @@ Do not ask more than three questions.
 34. Do not treat "looks good" as approval.
 35. Do not treat approval from an earlier session as approval here.
 36. Wait for the member to type "approved" in this session.
-37. Only then may files be moved to `output/approved/`.
+37. Only then may the reviewed draft be copied to `output/approved/`.
 38. Preserve the draft folder README with the approved copy.
 39. Use a dated folder with the same assignment name.
 40. Do not overwrite an existing approved folder.
@@ -80,8 +80,10 @@ Do not ask more than three questions.
 
 Before approval, print and keep the review checklist only.
 If helpful, save `review.md` in the named draft folder.
-After the member types "approved" in this session, move the reviewed files to `output/approved/<date>-<assignment>/`.
+After the member types "approved" in this session, copy the reviewed files to `output/approved/<date>-<assignment>/` and leave the original draft intact.
 Never create a posted copy.
+
+The agent may COPY a draft to `output/approved/` only after the member types the word approved in that session. The draft stays in `output/drafts/`. A person posts it.
 
 # Review checklist
 
@@ -97,7 +99,7 @@ Never create a posted copy.
 - Never repeat or preserve customer identifying details.
 - Never allow a carrier or contracted company name.
 - Never publish, post, upload, or send anything.
-- Never expose `.env`, keys, tokens, or IDs.
+- Never expose a key, token, or the contents of `.env`.
 - Never approve a clone without the required consent.
 - Never add another tool, account, or paid service without asking.
 - Never spend credits during review, and require a new test before any changed full generation.

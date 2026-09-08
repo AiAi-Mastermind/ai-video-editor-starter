@@ -27,16 +27,16 @@ Use the voice ID from `.env` without displaying it.
 # Steps
 
 1. Complete the READ and CHECK phases in `AGENTS.md`.
-2. Run the brand interview if any `[FILL]` marker remains.
+2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
 3. Run `bash scripts/check-setup.sh`.
-4. Stop and use `SETUP.md` if ElevenLabs is disconnected.
-5. Confirm HyperFrames answers before composition work.
+4. Stop and use `SETUP.md` if ElevenLabs or HyperFrames is disconnected.
+5. Treat HeyGen as optional and do not stop when it is unavailable.
 6. Read the supplied page text or topic notes.
 7. If a page is unavailable, ask for pasted text and stop until it arrives.
 8. Remove customer details and restricted company names.
 9. Offer safe anonymous wording for anything removed.
 10. Identify one promise, three useful points, and one CTA.
-11. Create `output/drafts/<date>-faceless-explainer/`.
+11. Scaffold the draft folder with `hyperframes init output/drafts/<date>-faceless-explainer --non-interactive --example blank`.
 12. Write `scenes.md` with 5 to 7 scenes.
 13. Make each scene 8 to 12 seconds long.
 14. Give each scene one headline.
@@ -58,7 +58,7 @@ Use the voice ID from `.env` without displaying it.
 30. Default to no sound effect.
 31. If approved, make one original whoosh with ElevenLabs.
 32. Save it as `whoosh.mp3`.
-33. Create `composition.html` with HyperFrames.
+33. Write `composition.html` inside the scaffolded draft folder.
 34. Make every scene a full-frame card.
 35. Animate the headline into each scene.
 36. Keep supporting text readable and still long enough to read.
@@ -66,10 +66,10 @@ Use the voice ID from `.env` without displaying it.
 38. Follow the caption defaults in the brand kit.
 39. Add a 4-second end card with brand name and CTA.
 40. Use only local assets from `brand/assets/`.
-41. Validate and lint the composition.
+41. From inside the draft folder, run `hyperframes lint .`, then `hyperframes check .`.
 42. If a command flag is uncertain, run `hyperframes <command> --help` first.
-43. Render `faceless-explainer-16x9.mp4`.
-44. Render `faceless-explainer-9x16.mp4`.
+43. From inside the draft folder, render wide with `hyperframes render . --composition composition.html --output faceless-explainer-16x9.mp4`.
+44. Set the vertical size in `composition.html`, run `hyperframes lint .` and `hyperframes check .` again, then render from inside the draft folder with `hyperframes render . --composition composition.html --output faceless-explainer-9x16.mp4`.
 45. Inspect headline edges, captions, scene timing, and sound.
 46. Write the required `README.md`.
 47. Record known and estimated credits.
@@ -105,7 +105,7 @@ Write these in `output/drafts/<date>-faceless-explainer/`:
 
 - Never include customer identifying details or name a carrier.
 - Never publish, post, upload, or send a result.
-- Never expose `.env`, keys, tokens, or IDs.
+- Never expose a key, token, or the contents of `.env`.
 - Never clone a voice without written consent.
 - Never add another tool, account, or paid service without asking.
 - Never make a full narration before the 10-second test.
