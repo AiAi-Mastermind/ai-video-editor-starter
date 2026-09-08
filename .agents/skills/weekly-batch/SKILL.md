@@ -1,0 +1,105 @@
+---
+name: weekly-batch
+description: Use when the member says "weekly batch" or asks to run assignments 1, 2, and 3 from assignments/weekly-brief.md.
+---
+
+# Purpose
+
+Run the three core video assignments as one careful weekly job.
+Skip missing inputs without guessing.
+Give the member one report for everything that needs review.
+
+# Inputs
+
+Read silently:
+
+- `AGENTS.md`.
+- `brand/brand-kit.md`.
+- `compliance/rules.md`.
+- `assignments/weekly-brief.md`.
+- The three numbered assignment files.
+
+Ask at most three questions for the whole batch.
+Ask one question per message and include example answers.
+"I do not know" means use the skill default.
+Never invent a missing topic, clone brief, or recording.
+
+# Steps
+
+1. Complete the READ phase from `AGENTS.md`.
+2. Run the brand interview if any `[FILL]` marker remains.
+3. Run `bash scripts/check-setup.sh` once for the full batch.
+4. Report whether HeyGen, ElevenLabs, and HyperFrames answer.
+5. Stop if HeyGen or ElevenLabs is disconnected.
+6. Use `SETUP.md` to explain the next connection step.
+7. Screen the whole weekly brief for customer details.
+8. Screen it for carrier and contracted company names.
+10. Offer anonymized wording when needed.
+11. Create `output/drafts/<date>-weekly/`.
+12. Make subfolders `clone-message/`, `faceless-explainer/`, and `shorts/` only as needed.
+13. Check whether assignment 1 has a useful brief.
+14. If it is missing, record "Assignment 1 skipped, brief missing."
+15. If it is present, follow the `clone-message` skill.
+16. Keep assignment 1 outputs in the weekly clone subfolder.
+17. Check whether assignment 2 has a topic or page.
+18. If it is missing, record "Assignment 2 skipped, topic missing."
+19. If it is present, follow the `faceless-explainer` skill.
+20. Keep assignment 2 outputs in the weekly explainer subfolder.
+21. Check whether assignment 3 names one existing recording.
+22. If it is missing, record "Assignment 3 skipped, recording missing."
+23. If it is present, follow the `shorts-from-recording` skill.
+24. Keep assignment 3 outputs in the weekly shorts subfolder.
+25. Do not count a skipped item as a failure.
+26. Before paid generation, add all expected clip lengths.
+27. Estimate HeyGen and ElevenLabs credit use for the batch.
+28. Tell the member before any generation over 60 seconds.
+29. Make the required 10-second test for each new voice or avatar setup.
+30. Reuse a passed test from this same session when settings are unchanged.
+31. Never reuse a test after changing voice, avatar, pace, or language.
+32. Generate work in assignment order, 1 then 2 then 3.
+33. Stop one assignment if its tool fails, record why, then assess whether later work is safe.
+34. Do not replace a failed core tool with another paid service.
+35. Validate and inspect every HyperFrames composition.
+36. Render the sizes required by each assignment.
+37. Keep all results in `output/drafts/`.
+38. Write `REPORT.md` at the weekly folder root.
+39. Add a section called "What was made."
+40. List every final file with a plain description.
+41. Add a section called "What was skipped."
+42. List missing inputs and tool failures.
+43. Add a section called "What needs review."
+44. Include the 12 boxes from `checks/review-checklist.md`.
+45. Add a section called "Credits."
+46. Record estimated and known use for both paid tools.
+47. Add links to each subfolder README.
+48. End with the closing paragraph required by `AGENTS.md`.
+
+# Outputs
+
+Write within `output/drafts/<date>-weekly/`:
+
+- `clone-message/` when assignment 1 has input.
+- `faceless-explainer/` when assignment 2 has input.
+- `shorts/` when assignment 3 has input.
+- A `README.md` inside every created subfolder.
+- `REPORT.md` for the complete batch.
+
+# Review checklist
+
+- [ ] Every included assignment followed its own skill.
+- [ ] Missing inputs were skipped and named clearly.
+- [ ] No customer details or restricted company names appear.
+- [ ] Every paid full generation followed a short test.
+- [ ] All requested sizes were rendered and inspected.
+- [ ] Every final file remains in drafts.
+- [ ] The report lists review needs and credits.
+
+# Never
+
+- Never include customer details or identifying stories.
+- Never name a carrier or contracted company.
+- Never publish, post, upload, send, or approve automatically.
+- Never expose `.env`, a key, token, voice ID, or avatar ID.
+- Never clone another person without written consent.
+- Never add another tool, account, or paid service without asking.
+- Never run a long paid generation without a 10-second test and the required credit estimate.

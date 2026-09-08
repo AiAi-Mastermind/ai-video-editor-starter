@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+node_modules/
+output/**/*.mp4
+output/**/*.mov
+output/**/*.wav
+output/**/*.mp3
+input/recordings/*
+!input/recordings/.gitkeep
+.DS_Store
+.hyperframes/
+*.log
+tmp/
