@@ -15,7 +15,7 @@ foreach ($Name in $ExpectedNames) {
     $PresentNames[$Name] = $false
 }
 
-Write-Output "Local prerequisites"
+Write-Output "Local required helpers"
 
 if (Test-Path $EnvFile) {
     Get-Content $EnvFile | ForEach-Object {

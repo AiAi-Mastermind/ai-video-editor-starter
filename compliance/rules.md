@@ -52,7 +52,7 @@ Fixed: "This would need another service. Would you like to consider it first?"
 
 ## 7. Spend credits carefully
 
-HeyGen and ElevenLabs use metered credits. Make a 10-second test clip before a full render. Before any generation longer than 60 seconds, tell the member the estimated credit use.
+HeyGen and ElevenLabs use credits charged per use. Make a 10-second test clip before a full render. Before any generation longer than 60 seconds, tell the member the estimated credit use.
 
 Bad: "I generated the full 10-minute draft without testing."
 

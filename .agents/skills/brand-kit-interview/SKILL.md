@@ -1,6 +1,6 @@
 ---
 name: brand-kit-interview
-description: Use when the member says "interview me for the brand kit" or when brand/brand-kit.md contains a [FILL] marker.
+description: Use when the member says "interview me for the brand kit" or before video-making skills when brand/brand-kit.md contains a [FILL] marker. Never trigger for desk-check, review-gate or sample runs.
 ---
 
 # Purpose
@@ -45,7 +45,7 @@ Do not ask the same question twice.
 17. Default: dark charcoal `#202124` and warm cream `#FFF7E8`.
 18. Ask: "Which font feeling do you prefer?"
 19. Examples: "Clean and modern," "friendly and rounded," or "I do not know."
-20. Default: a clean system sans serif font.
+20. Default: a simple default font.
 21. Ask: "Which three words describe your tone?"
 22. Examples: "warm, quick, funny" or "calm, clear, trusted."
 23. Default: "warm, clear, practical."

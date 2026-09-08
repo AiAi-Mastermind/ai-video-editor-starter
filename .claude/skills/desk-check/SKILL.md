@@ -25,46 +25,33 @@ Do not run the brand interview because this check is not video work.
 
 # Steps
 
-1. Run `bash scripts/check-setup.sh` from the project folder.
-2. Read the report without printing any private value.
-3. If `.env` is missing, point the member to `SETUP.md` and stop.
-4. If a required value is missing, name only the missing key.
-5. Confirm the ElevenLabs signed-in connection is available.
-6. Use the ElevenLabs connection for a 10-second speech test.
-7. Use the voice ID referenced by `.env`.
-8. Use this exact speech: "Your AI video editor is connected."
-9. Save the test as `output/desk-check/<date>-voice-test.mp3`.
-10. Make the speech file 10 seconds long so it satisfies the short-test safety rule.
-11. Record the known or estimated ElevenLabs credit use.
-12. Do not reveal the voice ID in the report.
-13. Confirm the HeyGen signed-in connection is available.
-14. Ask HeyGen to list the member's avatars.
-15. Compare the list with the avatar ID referenced by `.env`.
-16. Do not print the full avatar ID.
-17. Do not generate an avatar video during this check.
-18. Run `hyperframes --version`.
-19. If that command is missing, use `SETUP.md` to explain installation.
-20. Do not install it without the member's request.
-21. Treat Whisper as optional.
-22. Treat ffmpeg as required for assignments 3 and weekly work.
-23. If HeyGen, ElevenLabs, or HyperFrames is disconnected, explain the next setup step.
-24. Stop before video work when any required tool is unavailable.
-25. Write `output/desk-check/<date>.md`.
-26. Start the report with exactly three status lines.
-27. Use `HeyGen: CONNECTED` or `HeyGen: NOT CONNECTED`.
-28. Use `ElevenLabs: CONNECTED` or `ElevenLabs: NOT CONNECTED`.
-29. Use `HyperFrames: CONNECTED` or `HyperFrames: NOT CONNECTED`.
-30. Below those lines, list node, npm, ffmpeg, and optional Whisper.
-31. Name the voice test file if it was created.
-32. State the estimated or known credit use.
-33. Never claim a connection based only on a value being present.
-34. A successful tool answer is required for CONNECTED.
-35. End in one plain-English paragraph.
+Before any stop, including a missing `.env`, print these three lines with the actual status and reason, then write the same status at the start of `output/drafts/<date>-desk-check/README.md`:
+
+```text
+HeyGen: NOT TESTED (reason)
+ElevenLabs: NOT TESTED (reason)
+HyperFrames: NOT TESTED (reason)
+```
+
+Each line must use CONNECTED, NOT CONNECTED, or NOT TESTED and explain why. A successful tool answer is required for CONNECTED. A failed attempted check is NOT CONNECTED. A check that could not run is NOT TESTED. Never claim a connection from a value being present. This reporting rule applies to every early stop below.
+
+1. Run `bash scripts/check-setup.sh` from the project folder. Read its report without displaying private values.
+2. Start all three tool statuses as NOT TESTED with the reason "check has not run". Create `output/drafts/<date>-desk-check/` for the note.
+3. If `.env` or a required value is missing, name only the missing setting, mark untested tools NOT TESTED with the missing-setup reason, print and save all three status lines, point to `SETUP.md`, and stop.
+4. Get IDs only through `bash scripts/read-id.sh ELEVENLABS_VOICE_ID` and `bash scripts/read-id.sh HEYGEN_AVATAR_ID`. Never open or print `.env` itself. Use the returned IDs only in tool calls, never in the report.
+5. Confirm the ElevenLabs signed-in connection answers. Use the selected voice for a 10-second speech test with this exact sentence: "Hello. Your AI video editor is connected and ready to work. This is a short test of your cloned voice, so you can check that it sounds like you."
+6. Save the test as `output/drafts/<date>-desk-check/voice-test.mp3`. Verify the file is at least 8 seconds long using its duration, not a guess. If it is shorter, report that the voice test needs correction before full generation. Record known or estimated ElevenLabs credit use.
+7. Confirm the HeyGen signed-in connection answers, ask it to list the member's avatars, and compare the selected avatar with the ID returned by the script. Do not print IDs. Do not generate an avatar video.
+8. Run `hyperframes --version`. If missing, explain the installation step in `SETUP.md`; do not install it without the member's request.
+9. Treat Whisper as optional and ffmpeg as required for assignment 3 and weekly work.
+10. Print all three status lines before any stop. If a required tool is unavailable, explain its next setup step and stop before video work.
+11. Write `output/drafts/<date>-desk-check/README.md` even when setup is incomplete. Begin with all three status lines, then include the required draft README sections: What was made, Files, Review checklist, and Credits. Below the statuses list node, npm, ffmpeg, optional Whisper, any test file made, and next steps. Record zero credits when no generation ran.
+12. End in one plain-English paragraph.
 
 # Outputs
 
-- `output/desk-check/<date>.md`, with status and next steps.
-- `output/desk-check/<date>-voice-test.mp3`, only when ElevenLabs answers.
+- `output/drafts/<date>-desk-check/README.md`, with all three statuses and next steps, even when a check stops early.
+- `output/drafts/<date>-desk-check/voice-test.mp3`, only when ElevenLabs answers and the test is generated.
 
 Use the date as `YYYY-MM-DD`.
 Do not put IDs or keys into either file.
@@ -73,7 +60,7 @@ Do not put IDs or keys into either file.
 
 - [ ] The report begins with three clear status lines.
 - [ ] No key, token, voice ID, or avatar ID is shown.
-- [ ] The 10-second speech used the exact approved sentence.
+- [ ] The 10-second speech used the exact approved sentence and its file was verified to be at least 8 seconds long.
 - [ ] HeyGen listed avatars and the chosen avatar was confirmed.
 - [ ] HyperFrames version was checked.
 - [ ] Missing setup steps point to `SETUP.md`.

@@ -14,7 +14,7 @@ local_brand_name=""
 local_default_output_sizes=""
 local_test_clip_seconds=""
 
-echo "Local prerequisites"
+echo "Local required helpers"
 
 if [ -f "$env_file" ]; then
   # Read only expected names from this folder's .env. Never execute its text.
@@ -71,11 +71,15 @@ check_value BRAND_NAME "$local_brand_name" MISSING
 check_value DEFAULT_OUTPUT_SIZES "$local_default_output_sizes" MISSING
 check_value TEST_CLIP_SECONDS "$local_test_clip_seconds" MISSING
 
-if [ -n "$local_elevenlabs_api_key" ] && command -v curl >/dev/null 2>&1; then
-  status_code="$(printf 'header = "xi-api-key: %s"\n' "$local_elevenlabs_api_key" | curl -s -o /dev/null -w '%{http_code}' -K - https://api.elevenlabs.io/v1/user 2>/dev/null)"
+# Set CHECK_SETUP_OFFLINE=1 for an installation check only, with no network calls.
+if [ "${CHECK_SETUP_OFFLINE:-0}" = "1" ]; then
+  echo "ElevenLabs key check: NOT TESTED (installation check only; offline)"
+elif [ -n "$local_elevenlabs_api_key" ] && command -v curl >/dev/null 2>&1; then
+  status_code="$(printf 'header = "xi-api-key: %s"\n' "$local_elevenlabs_api_key" | curl -s -o /dev/null -w '%{http_code}' -K - https://api.elevenlabs.io/v1/voices 2>/dev/null)"
   case "$status_code" in
     200) echo "ElevenLabs key works" ;;
-    401|403) echo "ElevenLabs key rejected" ;;
+    401) echo "ElevenLabs key rejected (wrong or expired key)" ;;
+    403) echo "ElevenLabs key is missing a permission (allow Voices read when you create the key)" ;;
     *) echo "ElevenLabs could not be reached" ;;
   esac
 else

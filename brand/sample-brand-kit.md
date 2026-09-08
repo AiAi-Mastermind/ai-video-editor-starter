@@ -14,15 +14,15 @@ This practice brand is fictional.
 
 - Primary color: `#F4A261`
 - Secondary color: `#264653`
-- Font: Use the default system sans serif font
+- Font: Use a simple default font
 - Tone: Warm, quick, a little funny
 - Never appear: Real customer names
 
 ## Video defaults
 
-- Output sizes: 16:9 and 9:16
-- Captions: No more than 6 words per line, in the bottom third
-- Opening hook: About 3 seconds
-- End card: About 4 seconds with the main call to action
+- Output sizes: 16:9 and 9:16.
+- Captions: white text on a dark rounded background, in the bottom third, with no more than 6 words per line.
+- Hook: big text for the first 3 seconds.
+- End card: business name and call to action for 4 seconds.
 - Voice ID: in `.env`
 - Avatar ID: in `.env`

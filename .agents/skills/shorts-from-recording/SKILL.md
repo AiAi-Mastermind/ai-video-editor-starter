@@ -25,6 +25,7 @@ Ask where the face is only when a center crop would be unsafe.
 Default to the top three scored segments.
 Default to a center crop for 9:16.
 Default to no HeyGen opening clip.
+If the optional clone opening needs IDs, get them only through `bash scripts/read-id.sh HEYGEN_AVATAR_ID` and `bash scripts/read-id.sh ELEVENLABS_VOICE_ID`. Use their output in tool calls only, never in reports. Never open or print `.env` itself.
 
 # Steps
 

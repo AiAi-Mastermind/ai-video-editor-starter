@@ -22,7 +22,7 @@ Input is one URL or one topic.
 If page text cannot be fetched, ask the member to paste the useful text.
 Ask at most three questions, one per message, with example answers.
 Use the sample topic when the member says "I do not know."
-Use the voice ID from `.env` without displaying it.
+Get the voice ID only through `bash scripts/read-id.sh ELEVENLABS_VOICE_ID`. Use its output in tool calls only, never in reports. Never open or print `.env` itself.
 
 # Steps
 
@@ -35,7 +35,7 @@ Use the voice ID from `.env` without displaying it.
 7. If a page is unavailable, ask for pasted text and stop until it arrives.
 8. Remove customer details and restricted company names.
 9. Offer safe anonymous wording for anything removed.
-10. Identify one promise, three useful points, and one CTA.
+10. Identify one promise, three useful points, and one call to action (CTA).
 11. Scaffold the draft folder with `hyperframes init output/drafts/<date>-faceless-explainer --non-interactive --example blank`.
 12. Write `scenes.md` with 5 to 7 scenes.
 13. Make each scene 8 to 12 seconds long.
@@ -52,13 +52,13 @@ Use the voice ID from `.env` without displaying it.
 24. Generate a 10-second narration test with ElevenLabs.
 25. Save it as `test-voice.mp3`.
 26. Check pronunciation, pace, and tone before continuing.
-27. Generate the full narration with the voice ID from `.env`.
+27. Generate the full narration with the voice ID returned by `bash scripts/read-id.sh ELEVENLABS_VOICE_ID`.
 28. Save it as `narration.mp3`.
 29. Ask once whether a light whoosh is wanted.
 30. Default to no sound effect.
 31. If approved, make one original whoosh with ElevenLabs.
 32. Save it as `whoosh.mp3`.
-33. Write `composition.html` inside the scaffolded draft folder.
+33. Author the composition as `index.html` in the draft folder, editing the file that `hyperframes init` created. Set its initial size to 16:9.
 34. Make every scene a full-frame card.
 35. Animate the headline into each scene.
 36. Keep supporting text readable and still long enough to read.
@@ -68,8 +68,8 @@ Use the voice ID from `.env` without displaying it.
 40. Use only local assets from `brand/assets/`.
 41. From inside the draft folder, run `hyperframes lint .`, then `hyperframes check .`.
 42. If a command flag is uncertain, run `hyperframes <command> --help` first.
-43. From inside the draft folder, render wide with `hyperframes render . --composition composition.html --output faceless-explainer-16x9.mp4`.
-44. Set the vertical size in `composition.html`, run `hyperframes lint .` and `hyperframes check .` again, then render from inside the draft folder with `hyperframes render . --composition composition.html --output faceless-explainer-9x16.mp4`.
+43. From inside the draft folder, render wide with `hyperframes render . --output faceless-explainer-16x9.mp4`.
+44. Set the vertical size in `index.html`, run `hyperframes lint .` and `hyperframes check .` again, then render from inside the draft folder with `hyperframes render . --output faceless-explainer-9x16.mp4`.
 45. Inspect headline edges, captions, scene timing, and sound.
 46. Write the required `README.md`.
 47. Record known and estimated credits.
@@ -85,7 +85,7 @@ Write these in `output/drafts/<date>-faceless-explainer/`:
 - `test-voice.mp3`.
 - `narration.mp3`.
 - `whoosh.mp3`, only when approved.
-- `composition.html`.
+- `index.html`.
 - `faceless-explainer-16x9.mp4`.
 - `faceless-explainer-9x16.mp4`.
 - `README.md`.

@@ -52,7 +52,7 @@ Do not ask more than three questions.
 23. Compare colors with `brand/brand-kit.md`.
 24. Check the brand name and any logo.
 25. Check the opening hook appears for about 3 seconds.
-26. Check that the CTA is present and accurate.
+26. Check that the call to action (CTA) is present and accurate.
 27. Check that the end card lasts about 4 seconds.
 28. Check for clean audio starts and endings.
 29. Check for unexpected silence, clipping, or overlap.

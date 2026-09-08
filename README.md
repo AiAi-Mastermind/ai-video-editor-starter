@@ -14,11 +14,13 @@ Claude Code is a fully supported alternative agent. Its own plan cost is separat
 
 ## Start in five steps
 
-1. Click **Use this template** on GitHub.
-2. Open the folder in Codex or Claude Code.
-3. Copy `.env.example` to `.env`, then paste in your private keys and IDs.
-4. Tell your agent, "Read AGENTS.md and run the desk check."
-5. When setup passes, tell it, "Run assignment 1."
+1. Click **Use this template** on GitHub and open the folder in Codex or Claude Code.
+2. Follow `SETUP.md` to install the helpers, set up your accounts, and fill in your private settings.
+3. Paste: "Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet."
+4. Paste: "Run assignment 1 with the sample brief."
+5. To make the videos yours, paste: "Interview me for the brand kit."
+
+The sample run needs no brand kit of your own. It uses `brand/sample-brand-kit.md`, so nothing needs filling in.
 
 ## Assignments
 
@@ -58,5 +60,5 @@ AiAi Mastermind, **Creating Video Content with AI Agents**, "Hire the AI employe
 - Never publish, post, upload, or send automatically. Put finished files in `output/drafts/`.
 - Never write a key or token anywhere except `.env`, print `.env`, or commit `.env`.
 - Never clone another person's face or voice without their written consent in `brand/consent.md`.
-- Never add tools, accounts, or paid services beyond the stated stack without asking first.
-- Never waste metered credits. Make a 10-second test first and estimate credits before generating more than 60 seconds.
+- Never add tools, accounts, or paid services beyond the stated tools without asking first.
+- Never waste credits charged per use. Make a 10-second test first and estimate credits before generating more than 60 seconds.
