@@ -1,6 +1,10 @@
 # Setup
 
-This assumes you can open a folder as a Codex project, start a new chat, find Plugins (bottom left of the sidebar), and see the file pane. If not, watch the Codex setup lesson in Build Your First Agency App first.
+This assumes you can open a folder as a Codex project, start a new chat, find Plugins in the sidebar, and see the file pane. If not, watch the Codex setup lesson in the separate **Build Your First Agency App** course first. That prerequisite is separate from this video-editing course.
+
+A cloned starter folder looks like this. File names are visible; private file contents are not.
+
+<img src="docs/screenshots/starter-folder.png" alt="Starter folder showing assignments, brand files, scripts and START-HERE.md without opening any private file" width="202">
 
 ## Step 1, install the three free helpers (installation check only)
 
@@ -87,7 +91,11 @@ In ElevenLabs, open Developers in the left sidebar, then API keys, then Create k
 - [ ] Sound Effects
 - [ ] Music Generation (optional)
 
-Set the **Voices dropdown to Read**. This is required. Keep the key private for the next step. Never paste it into chat or another shared file.
+In the **Voices row, choose Read**. This is required. Keep the key private for the next step. Never paste it into chat or another shared file.
+
+<img src="docs/screenshots/elevenlabs-voices-read.png" alt="Recorded API permission controls: Voices offers No Access, Read and Write, with No Access still selected" width="480">
+
+Find the Voices row and choose **Read**. This recording frame shows the control **before it is set**; No Access is not the completed setting.
 
 ## Step 6, create your private settings file
 
@@ -130,7 +138,11 @@ HeyGen signs in through the plugin. ElevenLabs speech uses the key in `.env` thr
 
 ### Codex app
 
-For HeyGen: open Plugins (bottom left of the Codex app), search HeyGen, click + (Install); a browser page asks to connect through HeyGen MCP; Authorize access, Open ChatGPT; START A NEW CHAT; success: ask what tools you have from HeyGen and it lists them.
+<img src="docs/screenshots/codex-new-chat-and-plugins.png" alt="Codex sidebar showing the New chat and Plugins navigation labels" width="240">
+
+Use **Plugins** to connect a tool, then **New chat** to start a conversation that can see it.
+
+For HeyGen: open Plugins in the Codex sidebar, search HeyGen, click + (Install); a browser page asks to connect through HeyGen MCP; Authorize access, Open ChatGPT; START A NEW CHAT; success: ask what tools you have from HeyGen and it lists them.
 
 For HyperFrames: open Plugins, search HyperFrames, click + (Install). No sign-in. The plugin adds instructions; the hyperframes command from Step 1 does the rendering and is what the desk check tests. Start a NEW chat. Success: ask what HyperFrames skills it has.
 
@@ -164,7 +176,7 @@ The agent runs `bash scripts/check-setup.sh` on Mac or `scripts/check-setup.ps1`
 >
 > - Not signed in: reopen the plugin and finish sign-in, then START A NEW CHAT and paste the first prompt from START-HERE.md again. In Claude Code, use `/mcp`, finish sign-in; if still missing, quit and reopen the folder and paste the prompt again.
 > - Wrong plan: confirm that HeyGen and ElevenLabs show the Creator plan.
-> - Key not restricted correctly: under Developers, API keys, make a new key using the Step 5 checkbox list (Text to Speech, Speech to Text, Sound Effects, Music Generation optional) and set the Voices dropdown to Read.
+> - Key not restricted correctly: under Developers, API keys, make a new key using the Step 5 checkbox list (Text to Speech, Speech to Text, Sound Effects, Music Generation optional) and set Voices to Read.
 
 ## Optional, import your voice into HeyGen (only if HeyGen refuses uploaded audio)
 

@@ -16,7 +16,7 @@ Claude Code is a fully supported alternative agent. Its own plan cost is separat
 
 ## Before you start
 
-This assumes you can open a folder as a Codex project, start a new chat, find Plugins (bottom left of the sidebar), and see the file pane. If not, watch the Codex setup lesson in Build Your First Agency App first.
+This assumes you can open a folder as a Codex project, start a new chat, find Plugins in the sidebar, and see the file pane. If not, watch the Codex setup lesson in the separate **Build Your First Agency App** course first. It is the prerequisite course, not a lesson in this video-editing course.
 
 ## Start in five steps
 
