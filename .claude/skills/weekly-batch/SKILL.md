@@ -26,6 +26,10 @@ Never invent a missing topic, clone brief, or recording.
 
 # Steps
 
+For new work, reserve a fresh draft folder. If it exists, add `-2`, then `-3` until creation succeeds. Use that chosen path in every command below. Revisions use the existing folder.
+
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+
 1. Complete the READ phase from `AGENTS.md`.
 2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
 3. Run `bash scripts/check-setup.sh` once for the full batch.
@@ -68,7 +72,7 @@ Never invent a missing topic, clone brief, or recording.
 41. Add a section called "What was skipped."
 42. List missing inputs and tool failures.
 43. Add a section called "What needs review."
-44. Include the 12 boxes from `checks/review-checklist.md`.
+44. Include all boxes from `checks/review-checklist.md`.
 45. Add a section called "Credits."
 46. Record estimated and known use for both paid tools.
 47. Add links to each subfolder README.

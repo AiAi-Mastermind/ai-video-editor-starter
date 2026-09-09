@@ -52,8 +52,8 @@ Fixed: "This would need another service. Would you like to consider it first?"
 
 ## 7. Spend credits carefully
 
-HeyGen and ElevenLabs use credits charged per use. Make a 10-second test clip before a full render. Before any generation longer than 60 seconds, tell the member the estimated credit use.
+HeyGen has two balances: plan credits (used by the signed-in HeyGen connection) and separately purchased API credits (used by a HeyGen API key or the heygen command). Always use the signed-in connection. Never use a HeyGen API key or the heygen command unless the member asks for it in this session. Before every HeyGen generation, including the 10-second test, say in one sentence which balance it will use and the estimate. Make a 10-second test before a full render. Before ElevenLabs generation longer than 60 seconds, give the estimated credit use.
 
-Bad: "I generated the full 10-minute draft without testing."
+Bad: "I used the HeyGen command without telling you which balance it charges."
 
-Fixed: "The 10-second test is ready. The full video is estimated to use [amount] credits."
+Fixed: "This 10-second HeyGen test will use your plan credits, with an estimated cost of [amount]."

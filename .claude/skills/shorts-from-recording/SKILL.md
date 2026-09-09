@@ -29,6 +29,10 @@ If the optional clone opening needs IDs, get them only through `bash scripts/rea
 
 # Steps
 
+For new work, reserve a fresh draft folder. If it exists, add `-2`, then `-3` until creation succeeds. Use that chosen path in every command below. Revisions use the existing folder.
+
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+
 1. Complete the READ and CHECK phases in `AGENTS.md`.
 2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
 3. Run `bash scripts/check-setup.sh`.
@@ -40,7 +44,7 @@ If the optional clone opening needs IDs, get them only through `bash scripts/rea
 9. Never copy unsafe details into notes, captions, or file names.
 10. Create and transcribe into the draft project with `hyperframes init output/drafts/<date>-shorts-from-recording --video <file> --non-interactive`.
 11. The generated transcript file lands inside `output/drafts/<date>-shorts-from-recording/`. Convert that generated transcript into `transcript.md` in the draft root.
-12. If that path fails, use ElevenLabs speech to text.
+12. If that path fails, use ElevenLabs speech to text only when the chat tool is listed in this chat. Otherwise skip that extra, note it in the README, and ask for a transcript to continue.
 13. Save the cleaned transcript as `transcript.md`.
 14. Do not invent additional HyperFrames flags.
 15. Run `hyperframes init --help` when command behavior is uncertain.
@@ -70,7 +74,7 @@ If the optional clone opening needs IDs, get them only through `bash scripts/rea
 39. Optionally offer a 3-second HeyGen clone opening that says the hook.
 40. Default to no clone opening.
 41. If approved, confirm the clone is the member's own or has written consent.
-42. Estimate HeyGen and ElevenLabs credits before generation.
+42. Before every HeyGen generation, say it uses plan credits through the signed-in connection and give the estimate. Never use a HeyGen API key or the heygen command unless the member requests it in this session. Speech uses `scripts/elevenlabs-speak.sh` once the key works. Skip the optional hook when HeyGen tools are absent in this chat.
 43. Generate a 10-second clone test before any full clone work.
 44. Do not generate over 60 seconds without a credit estimate.
 45. Validate and lint all compositions.

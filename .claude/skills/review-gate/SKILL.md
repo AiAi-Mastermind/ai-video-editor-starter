@@ -27,6 +27,8 @@ Do not ask more than three questions.
 
 # Steps
 
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+
 1. Use no setup or connection tools. Confirm the target is inside `output/drafts/`.
 2. Never review a broad path or unrelated folder.
 3. Read the folder README and listed files.
@@ -47,7 +49,7 @@ Do not ask more than three questions.
 18. Check that captions stay in the bottom third.
 19. Check each requested aspect ratio.
 20. Confirm wide work is 16:9.
-21. Confirm vertical work is 9:16.
+21. Confirm vertical work is 9:16. Check that the picture fills the frame at one steady size, no black bars.
 22. Check safe margins so words are not clipped.
 23. Compare colors with `brand/brand-kit.md`.
 24. Check the brand name and any logo.
@@ -56,7 +58,7 @@ Do not ask more than three questions.
 27. Check that the end card lasts about 4 seconds.
 28. Check for clean audio starts and endings.
 29. Check for unexpected silence, clipping, or overlap.
-30. Print all 12 boxes from `checks/review-checklist.md`.
+30. Print all boxes from `checks/review-checklist.md`.
 31. Mark only checks supported by direct inspection.
 32. Leave human judgment boxes empty.
 33. Tell the member exactly what still needs watching.
@@ -71,7 +73,7 @@ Do not ask more than three questions.
 42. Never open a social platform or upload destination.
 43. Record approval date and the member's typed approval in the copied README.
 44. Do not spend HeyGen or ElevenLabs credits during review.
-45. If a fix is requested, return the work to its owning skill.
+45. If a fix is requested, return the work to its owning skill's Revise section, keeping the same draft folder and existing narration unless the words change.
 46. A new paid generation still needs the normal short test and estimate rules.
 47. Re-run this full gate after any changed final render.
 48. End with the required plain-English closing paragraph.

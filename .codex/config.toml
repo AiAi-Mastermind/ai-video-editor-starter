@@ -1,13 +1,13 @@
 # Codex settings for this folder.
-# In the Codex app the normal path is the Plugins panel: authorize HeyGen, enable HyperFrames,
-# and add ElevenLabs as a custom plugin with the address below. This file is the fallback for the
-# Codex command line, so the same two services are known there too. Sign-in (OAuth) happens in the app
-# or on first use; no key is stored in this file.
+# In the app, connect HeyGen in Plugins and install the HyperFrames instructions plugin.
+# Speech uses scripts/elevenlabs-speak.sh and the private key in .env.
+# The optional ElevenLabs chat connection below is for extras, such as music and sound effects.
+# Start a new chat after connecting a plugin. No key is stored in this file.
 
 [mcp_servers.heygen]
 # Your HeyGen video clone. Sign in with your HeyGen account when asked.
 url = "https://mcp.heygen.com/mcp/v1/"
 
 [mcp_servers.elevenlabs]
-# Your ElevenLabs voice clone, speech, sound effects and transcription. Sign in with your ElevenLabs account when asked.
+# Optional sound effects, music and transcription. Speech always uses the project script.
 url = "https://api.elevenlabs.io/v1/mcp"

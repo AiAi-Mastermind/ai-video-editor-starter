@@ -28,3 +28,13 @@ Complete this with the `brand-kit-interview` skill.
 - Captions: white text on a dark rounded background, in the bottom third, with no more than 6 words per line.
 - Hook: big text for the first 3 seconds.
 - End card: business name and call to action for 4 seconds.
+
+- Background music: none
+
+Music options: none, light, upbeat.
+
+## Delivery
+
+- Pace: normal
+- Energy: natural
+- Pronunciation: say the name as written

@@ -26,3 +26,13 @@ This practice brand is fictional.
 - End card: business name and call to action for 4 seconds.
 - Voice ID: in `.env`
 - Avatar ID: in `.env`
+
+- Background music: none
+
+Music options: none, light, upbeat.
+
+## Delivery
+
+- Pace: fast
+- Energy: upbeat
+- Pronunciation: say the name as written

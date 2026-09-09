@@ -1,6 +1,6 @@
 ---
 name: brand-kit-interview
-description: Use when the member says "interview me for the brand kit" or before video-making skills when brand/brand-kit.md contains a [FILL] marker. Never trigger for desk-check, review-gate or sample runs.
+description: Use when the member says "interview me for the brand kit" or "get my brand kit from ..." or supplies a brand source, or before video-making skills when brand/brand-kit.md contains a [FILL] marker. Never trigger for desk-check, review-gate or sample runs.
 ---
 
 # Purpose
@@ -18,7 +18,7 @@ Read these files silently:
 - `compliance/rules.md`.
 - `.env.example`, for reference names only.
 
-Ask up to eight questions, one at a time.
+Ask up to nine questions, one at a time.
 Each message must contain only one question.
 Give two or three example answers.
 Accept "I do not know" as a complete answer and use the default.
@@ -26,11 +26,15 @@ Do not ask the same question twice.
 
 # Steps
 
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+
 1. Check the existing brand kit for completed answers.
 2. Keep any clear answer already provided.
-3. Ask: "What is your business name?"
+Before the questions below, use a supplied source first. If none was named, ask once: "Do you have a file, folder, or website I can use?" Examples: "my brand document", "my website address", or "I do not know" (continue with the interview). In a folder, read only brand, marketing, and about files. Skip customer files, quotes, policies, and `.env`. If a page cannot be fetched, ask for pasted text. Screen imported text for customer details and carrier or contracted company names before saving. Fill the fields it answers, show what was filled, then ask only about remaining `[FILL]` fields using the questions below. Count the source question within the nine-question limit.
+
+3. Ask only if missing: "What is your business name?"
 4. Examples: "Sunrise Family Bakery" or "Northside Home Care."
-5. Default: use the value named by `BRAND_NAME` without showing `.env`.
+5. No default: every end card shows the business name. Explain this and wait for the name if it is still missing.
 6. Ask: "What do you sell, in one sentence?"
 7. Examples: "Custom cakes and breakfast boxes" or "Annual coverage reviews."
 8. Default: "Helpful products and services for local customers."
@@ -79,6 +83,7 @@ The file keeps its fixed output, caption, hook, and end-card sections.
 
 # Review checklist
 
+- [ ] A supplied source was screened and used before asking only for missing fields.
 - [ ] Every interview field has a useful answer.
 - [ ] No `[FILL]` marker remains.
 - [ ] Business name and offer are accurate.

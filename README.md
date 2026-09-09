@@ -10,15 +10,21 @@ Prices as of September 2026:
 - HeyGen Creator, $29 per month or $24 per month when paid yearly, for your video clone.
 - ElevenLabs Creator, $22 per month, with an $11 first month, for your professional voice clone.
 
+- HyperFrames, a separate free plugin installed from Codex Plugins, plus the free `hyperframes` command for rendering. It is not part of HeyGen.
+
 Claude Code is a fully supported alternative agent. Its own plan cost is separate.
+
+## Before you start
+
+This assumes you can open a folder as a Codex project, start a new chat, find Plugins (bottom left of the sidebar), and see the file pane. If not, watch the Codex setup lesson in Build Your First Agency App first.
 
 ## Start in five steps
 
-1. Click **Use this template** on GitHub and open the folder in Codex or Claude Code.
+1. Copy this repository's link. In Codex choose Projects, +, Local, Next, name it, then Create new folder. In its first chat paste the link and "Clone this repo for me into this local folder". Success: the folder fills with files including START-HERE.md. In Claude Code, open a new local folder and paste the same link and prompt. **Use this template** on GitHub is an alternate; then clone your copy locally.
 2. Follow `SETUP.md` to install the helpers, set up your accounts, and fill in your private settings.
-3. Paste: "Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet."
+3. START A NEW CHAT, then paste: "Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet."
 4. Paste: "Run assignment 1 with the sample brief."
-5. To make the videos yours, paste: "Interview me for the brand kit."
+5. To make the videos yours, paste: "Fill in brand/brand-kit.md from <a file, a folder, or your website address>, ask me only about what is still missing, then run assignment 1." Or paste: "Interview me for the brand kit."
 
 The sample run needs no brand kit of your own. It uses `brand/sample-brand-kit.md`, so nothing needs filling in.
 

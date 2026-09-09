@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # This check never prints private values and always exits successfully.
+set +x
 set +e
 
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -9,8 +10,6 @@ env_file="$project_dir/.env"
 local_elevenlabs_api_key=""
 local_elevenlabs_voice_id=""
 local_heygen_avatar_id=""
-local_heygen_api_key=""
-local_brand_name=""
 local_default_output_sizes=""
 local_test_clip_seconds=""
 
@@ -18,15 +17,14 @@ echo "Local required helpers"
 
 if [ -f "$env_file" ]; then
   # Read only expected names from this folder's .env. Never execute its text.
-  while IFS='=' read -r key_name key_value; do
+  while IFS='=' read -r key_name key_value || [ -n "${key_name:-}" ]; do
     key_name="${key_name%$'\r'}"
     key_value="${key_value%$'\r'}"
+    if [[ "$key_value" == \"*\" || "$key_value" == \'*\' ]]; then key_value="${key_value:1:${#key_value}-2}"; fi
     case "$key_name" in
       ELEVENLABS_API_KEY) local_elevenlabs_api_key="$key_value" ;;
       ELEVENLABS_VOICE_ID) local_elevenlabs_voice_id="$key_value" ;;
       HEYGEN_AVATAR_ID) local_heygen_avatar_id="$key_value" ;;
-      HEYGEN_API_KEY) local_heygen_api_key="$key_value" ;;
-      BRAND_NAME) local_brand_name="$key_value" ;;
       DEFAULT_OUTPUT_SIZES) local_default_output_sizes="$key_value" ;;
       TEST_CLIP_SECONDS) local_test_clip_seconds="$key_value" ;;
     esac
@@ -66,8 +64,6 @@ check_command whisper "whisper (optional)"
 check_value ELEVENLABS_API_KEY "$local_elevenlabs_api_key" MISSING
 check_value ELEVENLABS_VOICE_ID "$local_elevenlabs_voice_id" MISSING
 check_value HEYGEN_AVATAR_ID "$local_heygen_avatar_id" MISSING
-check_value HEYGEN_API_KEY "$local_heygen_api_key" "OPTIONAL / NOT SET"
-check_value BRAND_NAME "$local_brand_name" MISSING
 check_value DEFAULT_OUTPUT_SIZES "$local_default_output_sizes" MISSING
 check_value TEST_CLIP_SECONDS "$local_test_clip_seconds" MISSING
 
@@ -75,16 +71,29 @@ check_value TEST_CLIP_SECONDS "$local_test_clip_seconds" MISSING
 if [ "${CHECK_SETUP_OFFLINE:-0}" = "1" ]; then
   echo "ElevenLabs key check: NOT TESTED (installation check only; offline)"
 elif [ -n "$local_elevenlabs_api_key" ] && command -v curl >/dev/null 2>&1; then
-  status_code="$(printf 'header = "xi-api-key: %s"\n' "$local_elevenlabs_api_key" | curl -s -o /dev/null -w '%{http_code}' -K - https://api.elevenlabs.io/v1/voices 2>/dev/null)"
-  case "$status_code" in
-    200) echo "ElevenLabs key works" ;;
-    401) echo "ElevenLabs key rejected (wrong or expired key)" ;;
-    403) echo "ElevenLabs key is missing a permission (allow Voices read when you create the key)" ;;
-    *) echo "ElevenLabs could not be reached" ;;
-  esac
+  if [[ "$local_elevenlabs_api_key" =~ ^[A-Za-z0-9_-]+$ ]]; then
+    response="$(printf 'header = "xi-api-key: %s"\n' "$local_elevenlabs_api_key" | curl -s --connect-timeout 15 --max-time 30 -w '\n%{http_code}' -K - https://api.elevenlabs.io/v1/voices 2>/dev/null)"
+    curl_result=$?
+    status_code="${response##*$'\n'}"
+    response_body="${response%$'\n'*}"
+    if [ "$curl_result" -ne 0 ]; then status_code=000; fi
+    case "$status_code" in
+      200) echo "ElevenLabs key works" ;;
+      401|403)
+        case "$response_body" in
+          *missing_permissions*) echo "Your key is missing a permission. Make a new key with Voices set to Read, see SETUP.md Step 5" ;;
+          *invalid_api_key*) echo "Wrong or expired key. Paste the whole key again with no extra spaces" ;;
+          *) echo "ElevenLabs rejected the key" ;;
+        esac ;;
+      *) echo "ElevenLabs could not be reached" ;;
+    esac
+  else
+    echo "Wrong or expired key. Paste the whole key again with no extra spaces"
+  fi
 else
   echo "ElevenLabs key check: SKIPPED"
 fi
 
-echo "Connections to HeyGen and ElevenLabs are tested by the desk-check skill, not by this script."
+echo "If the line above says ElevenLabs key works, ElevenLabs is connected even when its plugin is not in this chat."
+echo "The HeyGen connection and ElevenLabs speech are tested by the desk-check skill."
 exit 0
