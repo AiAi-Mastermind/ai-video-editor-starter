@@ -1,6 +1,6 @@
 # Setup
 
-This assumes you can open a folder as a Codex project, start a new chat, and see the file pane. If not, watch the Codex setup lesson in the separate **Build Your First Agency App** course first. That prerequisite is separate from this video-editing course.
+The rebuilt video course starts with the local project and its file pane. Follow that first lesson if you are new to folders or Codex. You do not need to complete another course first.
 
 There are no plugins in this course. One command installs everything.
 
@@ -11,7 +11,7 @@ A cloned starter folder looks like this. File names are visible; private file co
 ## The short version
 
 1. Get the three accounts.
-2. Submit your voice clone and your avatar clone the day before, because both take hours to process.
+2. Prepare voice and avatar accounts only for the route you need. Allow time for processing; use the status shown in your account.
 3. Make one ElevenLabs key.
 4. Ask your agent to run the setup command.
 5. Paste three values into `.env`.
@@ -20,21 +20,21 @@ A cloned starter folder looks like this. File names are visible; private file co
 
 ## Step 1, get the accounts
 
-You need ChatGPT Pro 5x for Codex, HeyGen Creator, and ElevenLabs Creator. Claude Code is an equal alternative to Codex. Sign in to each account before continuing.
+Use your existing ChatGPT account to sign in to Codex and check its usage limits. For generated videos, confirm your HeyGen avatar feature and ElevenLabs professional-clone slot. See the current account links in README.md. Editing an existing recording with its original sound does not require a cloned voice or avatar. Claude Code is an alternative agent.
 
 You need Node.js as well. If it is not already on this computer, download version 22 or newer from [nodejs.org](https://nodejs.org/) and run the installer. Success looks like: the installer says the installation completed successfully. Everything else installs itself in Step 5.
 
 ## Step 2, record your ElevenLabs professional voice
 
-Record at least 5 minutes of clean audio; 30 minutes is much better. Creator includes one professional clone. Processing takes four to six hours and can take up to half a day, so submit it the day before build day. Use a quiet room and one microphone. Read naturally. In ElevenLabs, open Voices, choose Add, then choose Professional Voice Clone and follow the guide.
+Prepare at least 30 minutes of clean recordings of your own voice; more clean speech can improve the result. Use a quiet room and consistent microphone. In ElevenLabs, choose Voices, Create Voice, then Professional Voice Clone. If the option says No slots available, check whether your existing clone is the one you want. In the creation form, name your voice, choose its language, click Upload samples, and check the combined duration before Next. Complete the required voice verification yourself. Use the processing status in your account rather than a fixed time promise. [Official professional-cloning guide](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/professional-voice-cloning).
 
 How you know it is ready: ElevenLabs shows the voice under My Voices with no Processing label.
 
-Only clone your own voice. A team member must first give written consent in `brand/consent.md`.
+Professional voice cloning requires the voice owner to complete the provider’s verification. A team member should create and verify their own clone in their own account, then use the provider’s permitted private-sharing route. Written consent alone does not replace verification.
 
 ## Step 3, make your HeyGen clone
 
-Record a 2-minute training video. Use a plain background, keep your whole face in frame the entire time, look at the lens, and read the consent line shown on screen. HeyGen needs processing time, so do this the day before build day. Follow HeyGen's lighting and framing guide.
+In HeyGen, open Avatars and choose New Avatar, then Clone a real person. Choose webcam, phone, or upload as offered in your account. The prep-party webcam flow used a short recording; do not assume every flow requires two minutes. Follow the duration, camera, consent, and verification instructions on your own screen. Keep your whole face visible and speak naturally. Review the recording, name the avatar, and submit it. Wait for the processing state to finish before previewing it.
 
 How you know it is ready: HeyGen shows the avatar with no Processing label and lets you preview it.
 
@@ -44,7 +44,7 @@ Only clone your own face. A team member must first give written consent in `bran
 
 This is the only key you will paste anywhere.
 
-In ElevenLabs, open Developers in the left sidebar, then API keys, then Create key. Tick these checkboxes:
+In ElevenLabs, open Developers in the left sidebar, then API keys, then Create key. Keep Restrict Key on. Choose Access for the following endpoint rows:
 
 - [ ] Text to Speech
 - [ ] Speech to Text
@@ -93,15 +93,15 @@ Setup created a file called `.env`. Open it yourself. Do not ask the agent to op
 - Mac: open this folder in Finder. Press Command, Shift and period together to show hidden files. Right-click `.env`, choose Open With, then TextEdit.
 - Windows: open this folder in File Explorer. Under View, turn on File name extensions and Hidden items. Right-click `.env`, choose Open with, then Notepad.
 
-Paste in three values, then save the file. Do not paste these values into chat.
+Paste each value after its matching equals sign, one setting per line. Then press Command-S on Mac or Control-S on Windows and close the editor. Confirm the filename is `.env`, not `.env.txt` or `.env.example`. Do not paste these values into chat.
 
 - [ ] `ELEVENLABS_API_KEY`, the private key from Step 4.
-- [ ] `ELEVENLABS_VOICE_ID`. In ElevenLabs, open My Voices and copy the ID shown under your voice.
+- [ ] `ELEVENLABS_VOICE_ID`. In ElevenLabs, open My Voices, find your own voice, open its three-dot menu, and choose Copy voice ID.
 - [ ] `HEYGEN_AVATAR_ID`. In HeyGen, open Avatars, choose your clone, and copy the ID from the address bar or details panel.
 
 Two settings are already filled in for you: `DEFAULT_OUTPUT_SIZES=16:9,9:16` for wide and vertical videos, and `TEST_CLIP_SECONDS=10` for the short first test.
 
-**Leave `HEYGEN_API_KEY` empty.** You do not need it and filling it in costs you money. Your $29 HeyGen plan credits are spent by the signed-in connection from Step 7. A HeyGen API key spends a different, pay-as-you-go balance instead, roughly $1 per minute of video and sold in $5 blocks, and your plan credits would sit unused.
+**Leave `HEYGEN_API_KEY` empty.** This course uses the signed-in HeyGen connection from Step 7. An API key uses a separate billing route; do not switch routes when troubleshooting. Check the current balance and generation estimate in your own account.
 
 The API key is secret. The voice ID and avatar ID are not secrets, but keep them in `.env` instead of shared files.
 
@@ -145,7 +145,7 @@ After changing `.env` or finishing a sign-in, START A NEW CHAT and paste that sa
 >
 > - A helper is missing: run the setup command from Step 5 again. It is safe to repeat.
 > - HeyGen is not signed in: do Step 7, then START A NEW CHAT. A connection never shows up in the chat that was open when you signed in.
-> - Wrong plan: confirm that HeyGen and ElevenLabs show the Creator plan.
+> - Missing feature: confirm the exact avatar or professional-clone feature in your own account before changing plans.
 > - Key not restricted correctly: under Developers, API keys, make a new key using the Step 4 checkbox list (Text to Speech, Speech to Text, Sound Effects, Music Generation optional) and set Voices to Read.
 
 ## Optional, import your voice into HeyGen (only if HeyGen refuses uploaded audio)

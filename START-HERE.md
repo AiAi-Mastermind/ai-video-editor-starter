@@ -15,7 +15,7 @@ When it finishes it prints a short list of what is left for you. That list is no
 If you only need the private settings file, use this prompt as part of SETUP.md Step 6, then open the file yourself as that step explains:
 
 ```text
-Copy .env.example to .env in this folder. Do not open it, read it, or show its contents. Tell me when it exists.
+If .env does not exist, copy .env.example to .env without overwriting an existing file. Do not open or display private values. Tell me when .env exists.
 ```
 
 ## Step 1, check what is connected

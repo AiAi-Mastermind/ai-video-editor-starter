@@ -4,28 +4,29 @@ This starter turns one recording into a month of marketing videos with an AI ass
 
 ## What you will need
 
-Prices as of September 2026:
+Start with the accounts you already have. Check the required feature and current usage allowance before buying an upgrade.
 
-- ChatGPT Pro 5x, $100 per month, for the Codex app.
-- HeyGen Creator, $29 per month or $24 per month when paid yearly, for your video clone.
-- ElevenLabs Creator, $22 per month, with an $11 first month, for your professional voice clone.
+- A ChatGPT account with access to Codex. A $100 plan is not a prerequisite. [Current Codex access and limits](https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan).
+- For an avatar: a HeyGen account that can create or use your own avatar. Check the feature in your account; existing avatars and plan allowances vary.
+- For cloned narration: an ElevenLabs account with an available Professional Voice Clone slot, or your own existing verified clone. [Professional cloning requirements](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/professional-voice-cloning).
+- HyperFrames and ffmpeg for local editing. Setup installs them.
+- Node.js 22 or newer. If it is missing, ask your agent to finish the installation steps it can and guide you through any action only you can complete.
 
-- HyperFrames, free. The setup command installs it and the instructions your agent reads. It is not part of HeyGen.
-- Node.js 22 or newer, free. Everything else installs itself.
+You can practice editing an existing recording with its original sound before setting up voice or avatar accounts.
 
-You do not need a HeyGen API key and you should not make one. It spends a separate pay-as-you-go balance, about $1 per minute, while your Creator plan credits sit unused.
+This starter uses HeyGen's signed-in OAuth connection. Leave `HEYGEN_API_KEY` empty. The API-key route has separate billing; check the [current HeyGen connection documentation](https://developers.heygen.com/mcp/overview) instead of relying on old per-minute prices.
 
 Claude Code is a fully supported alternative agent. Its own plan cost is separate.
 
 ## Before you start
 
-This assumes you can open a folder as a Codex project, start a new chat, and see the file pane. If not, watch the Codex setup lesson in the separate **Build Your First Agency App** course first. It is the prerequisite course, not a lesson in this video-editing course.
+The rebuilt video course begins with opening the local project and finding its files. Follow its first lesson; another course is not required. If you get stuck, name the app and the step, then ask the agent for one action at a time.
 
 There are no plugins in this course. One command installs every tool and registers every connection.
 
 ## Start in five steps
 
-1. Copy this repository's link. In Codex choose Projects, +, Local, Next, name it, then Create new folder. In its first chat paste the link and "Clone this repo for me into this local folder". Success: the folder fills with files including START-HERE.md. In Claude Code, open a new local folder and paste the same link and prompt. **Use this template** on GitHub is an alternate; then clone your copy locally.
+1. Copy this repository's link. In Codex choose Projects, +, Local, Next, name it, click the source-folders area, choose a location, then New Folder. Select the folder and finish with Create project. In its first chat paste the link and "Clone this repo for me into this local folder". Success: the folder fills with files including START-HERE.md. In Claude Code, open a new local folder and paste the same link and prompt. **Use this template** on GitHub is an alternate; then clone your copy locally.
 2. In that same chat paste: "Read AGENTS.md, then run the setup for me." One command installs ffmpeg, HyperFrames, the official `elevenlabs` command and your `.env` file, and registers your HeyGen connection. Then do the two things it lists: paste three values into `.env` yourself, and sign in to HeyGen once with `codex mcp login heygen` (in Claude Code, `/mcp`). `SETUP.md` covers the accounts, the voice clone, the avatar clone and the ElevenLabs key.
 3. START A NEW CHAT, then paste: "Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet."
 4. Paste: "Run assignment 1 with the sample brief."
