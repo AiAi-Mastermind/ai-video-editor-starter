@@ -12,3 +12,4 @@ input/recordings/*
 .hyperframes/
 *.log
 tmp/
+.setup-next-steps.txt

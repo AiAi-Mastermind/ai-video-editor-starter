@@ -31,7 +31,7 @@ If the optional clone opening needs IDs, get them only through `bash scripts/rea
 
 For new work, reserve a fresh draft folder. If it exists, add `-2`, then `-3` until creation succeeds. Use that chosen path in every command below. Revisions use the existing folder.
 
-Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HyperFrames is CONNECTED when `hyperframes --version` prints a version. HeyGen is CONNECTED when HeyGen tools are listed in this chat, and NOT SIGNED IN when they are not. A missing HeyGen sign-in is a normal first-run state, never a failure and never the member's fault. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection. If a helper is missing entirely, give one command, `bash scripts/bootstrap.sh` (Windows: `scripts/bootstrap.ps1`), and never send the member to a Plugins sidebar.
 
 1. Complete the READ and CHECK phases in `AGENTS.md`.
 2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
@@ -44,7 +44,7 @@ Decide connections from THIS chat only, never from another chat's README. Eleven
 9. Never copy unsafe details into notes, captions, or file names.
 10. Create and transcribe into the draft project with `hyperframes init output/drafts/<date>-shorts-from-recording --video <file> --non-interactive`.
 11. The generated transcript file lands inside `output/drafts/<date>-shorts-from-recording/`. Convert that generated transcript into `transcript.md` in the draft root.
-12. If that path fails, use ElevenLabs speech to text only when the chat tool is listed in this chat. Otherwise skip that extra, note it in the README, and ask for a transcript to continue.
+12. If that path fails, use `elevenlabs speech-to-text`. If that command is missing, skip that extra, note it in the README, and ask for a transcript to continue.
 13. Save the cleaned transcript as `transcript.md`.
 14. Do not invent additional HyperFrames flags.
 15. Run `hyperframes init --help` when command behavior is uncertain.

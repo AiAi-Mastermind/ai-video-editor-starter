@@ -28,7 +28,7 @@ Never invent a missing topic, clone brief, or recording.
 
 For new work, reserve a fresh draft folder. If it exists, add `-2`, then `-3` until creation succeeds. Use that chosen path in every command below. Revisions use the existing folder.
 
-Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HyperFrames is CONNECTED when `hyperframes --version` prints a version. HeyGen is CONNECTED when HeyGen tools are listed in this chat, and NOT SIGNED IN when they are not. A missing HeyGen sign-in is a normal first-run state, never a failure and never the member's fault. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection. If a helper is missing entirely, give one command, `bash scripts/bootstrap.sh` (Windows: `scripts/bootstrap.ps1`), and never send the member to a Plugins sidebar.
 
 1. Complete the READ phase from `AGENTS.md`.
 2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.

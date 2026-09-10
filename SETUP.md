@@ -1,72 +1,30 @@
 # Setup
 
-This assumes you can open a folder as a Codex project, start a new chat, find Plugins in the sidebar, and see the file pane. If not, watch the Codex setup lesson in the separate **Build Your First Agency App** course first. That prerequisite is separate from this video-editing course.
+This assumes you can open a folder as a Codex project, start a new chat, and see the file pane. If not, watch the Codex setup lesson in the separate **Build Your First Agency App** course first. That prerequisite is separate from this video-editing course.
+
+There are no plugins in this course. One command installs everything.
 
 A cloned starter folder looks like this. File names are visible; private file contents are not.
 
 <img src="docs/screenshots/starter-folder.png" alt="Starter folder showing assignments, brand files, scripts and START-HERE.md without opening any private file" width="202">
 
-## Step 1, install the three free helpers (installation check only)
+## The short version
 
-Do this whether you use Codex or Claude Code. You need Node.js 22 or newer, ffmpeg, and HyperFrames.
+1. Get the three accounts.
+2. Submit your voice clone and your avatar clone the day before, because both take hours to process.
+3. Make one ElevenLabs key.
+4. Ask your agent to run the setup command.
+5. Paste three values into `.env`.
+6. Sign in to HeyGen once.
+7. Run the desk check.
 
-### Mac
-
-Download Node.js 22 or newer from [nodejs.org](https://nodejs.org/) and run the installer. Success looks like: the installer says the installation completed successfully.
-
-Open [brew.sh](https://brew.sh/) in your web browser and copy the Homebrew installation line shown there. Open the Terminal app on Mac, paste that line, and press Enter. When it finishes, Terminal shows a heading that says Next steps with two or three commands under it. Paste each of those commands, one at a time, and press Enter.
-
-Then paste this line and press Enter:
-
-```sh
-brew --version
-```
-
-Success looks like: Terminal prints `Homebrew` followed by a version number.
-
-Open the Terminal app on Mac, paste this line, and press Enter:
-
-```sh
-brew install ffmpeg
-```
-
-Success looks like: Terminal finishes without an error and shows that ffmpeg was installed.
-
-Open the Terminal app on Mac, paste this line, and press Enter:
-
-```sh
-npm install -g hyperframes
-```
-
-Success looks like: Terminal finishes without an error and reports that a package was added or changed.
-
-### Windows
-
-Download Node.js 22 or newer from [nodejs.org](https://nodejs.org/) and run the installer. Success looks like: the installer says the installation completed successfully.
-
-Open PowerShell on Windows, paste this line, and press Enter:
-
-```powershell
-winget install Gyan.FFmpeg
-```
-
-Success looks like: PowerShell says ffmpeg was successfully installed.
-
-Open PowerShell on Windows, paste this line, and press Enter:
-
-```powershell
-npm install -g hyperframes
-```
-
-Success looks like: PowerShell finishes without an error and reports that a package was added or changed.
-
-This is an installation check only. Run `node --version`, `ffmpeg -version`, and `hyperframes --version`. Success looks like: each prints a version number, with Node.js at 22 or newer. The desk check reports HyperFrames from the command alone. The real desk check comes after the accounts and connections are ready.
-
-## Step 2, get the accounts
+## Step 1, get the accounts
 
 You need ChatGPT Pro 5x for Codex, HeyGen Creator, and ElevenLabs Creator. Claude Code is an equal alternative to Codex. Sign in to each account before continuing.
 
-## Step 3, record your ElevenLabs professional voice
+You need Node.js as well. If it is not already on this computer, download version 22 or newer from [nodejs.org](https://nodejs.org/) and run the installer. Success looks like: the installer says the installation completed successfully. Everything else installs itself in Step 5.
+
+## Step 2, record your ElevenLabs professional voice
 
 Record at least 5 minutes of clean audio; 30 minutes is much better. Creator includes one professional clone. Processing takes four to six hours and can take up to half a day, so submit it the day before build day. Use a quiet room and one microphone. Read naturally. In ElevenLabs, open Voices, choose Add, then choose Professional Voice Clone and follow the guide.
 
@@ -74,7 +32,7 @@ How you know it is ready: ElevenLabs shows the voice under My Voices with no Pro
 
 Only clone your own voice. A team member must first give written consent in `brand/consent.md`.
 
-## Step 4, make your HeyGen clone
+## Step 3, make your HeyGen clone
 
 Record a 2-minute training video. Use a plain background, keep your whole face in frame the entire time, look at the lens, and read the consent line shown on screen. HeyGen needs processing time, so do this the day before build day. Follow HeyGen's lighting and framing guide.
 
@@ -82,7 +40,9 @@ How you know it is ready: HeyGen shows the avatar with no Processing label and l
 
 Only clone your own face. A team member must first give written consent in `brand/consent.md`.
 
-## Step 5, create the ElevenLabs API key
+## Step 4, create the ElevenLabs API key
+
+This is the only key you will paste anywhere.
 
 In ElevenLabs, open Developers in the left sidebar, then API keys, then Create key. Tick these checkboxes:
 
@@ -97,72 +57,77 @@ In the **Voices row, choose Read**. This is required. Keep the key private for t
 
 Find the Voices row and choose **Read**. This recording frame shows the control **before it is set**; No Access is not the completed setting.
 
-## Step 6, create your private settings file
+## Step 5, run the setup command
 
-Do not use the Codex file pane for this step. Paste this prompt:
+Open the folder in Codex or Claude Code, start a chat, and paste this:
 
 ```text
-Copy .env.example to .env in this folder. Do not open it, read it, or show its contents. Tell me when it exists.
+Read AGENTS.md, then run the setup for me.
 ```
 
-Success: the agent says `.env` exists. Open it yourself:
+Your agent runs `scripts/bootstrap.sh` (on Windows, `scripts/bootstrap.ps1`). That one script:
+
+- checks Node.js,
+- installs ffmpeg, the video helper,
+- installs HyperFrames and the instructions your agent reads,
+- installs the official `elevenlabs` command,
+- creates your private `.env` file from the template without reading it,
+- and registers your HeyGen connection with Codex and with this folder.
+
+You can also run it yourself. Open Terminal in this folder and paste:
+
+```sh
+bash scripts/bootstrap.sh
+```
+
+On Windows, open PowerShell in this folder and paste `scripts/bootstrap.ps1`.
+
+Success looks like: the script prints six numbered steps and finishes with a short list titled "What is left for you to do". That list is normally the two things below. It is safe to run this script again at any time.
+
+There is nothing to click. You do not need the HeyGen plugin, the ElevenLabs plugin, or the HyperFrames plugin. If you installed them for an earlier version of this course, you can leave them; they do no harm.
+
+## Step 6, fill in your private settings
+
+Setup created a file called `.env`. Open it yourself. Do not ask the agent to open it, and do not use the Codex file pane.
 
 - Mac: open this folder in Finder. Press Command, Shift and period together to show hidden files. Right-click `.env`, choose Open With, then TextEdit.
 - Windows: open this folder in File Explorer. Under View, turn on File name extensions and Hidden items. Right-click `.env`, choose Open with, then Notepad.
 
-Fill in this checklist in your private `.env` file, then save it. You do not need to show this file to the agent. Do not paste these values into chat.
+Paste in three values, then save the file. Do not paste these values into chat.
 
-- [ ] Required: `ELEVENLABS_API_KEY`, the private key from Step 5.
-- [ ] Required: `ELEVENLABS_VOICE_ID`, your ready voice's ID. Step 8 shows where to find it.
-- [ ] Required: `HEYGEN_AVATAR_ID`, your ready avatar's ID. Step 8 shows where to find it.
-- [ ] Preset: `DEFAULT_OUTPUT_SIZES=16:9,9:16` for wide and vertical videos.
-- [ ] Preset: `TEST_CLIP_SECONDS=10` for the short first test.
+- [ ] `ELEVENLABS_API_KEY`, the private key from Step 4.
+- [ ] `ELEVENLABS_VOICE_ID`. In ElevenLabs, open My Voices and copy the ID shown under your voice.
+- [ ] `HEYGEN_AVATAR_ID`. In HeyGen, open Avatars, choose your clone, and copy the ID from the address bar or details panel.
 
-`.env` is plain text. It is safe enough for this starter because git ignores it, the agent never prints it, and the key is restricted. Keep the master copy in a password manager such as 1Password and treat `.env` as a working copy. You can make a new key in ElevenLabs and replace it at any time.
+Two settings are already filled in for you: `DEFAULT_OUTPUT_SIZES=16:9,9:16` for wide and vertical videos, and `TEST_CLIP_SECONDS=10` for the short first test.
 
-## Step 7, optional voice import
-
-Skip this step for normal use. Only if HeyGen refuses uploaded audio, follow "Optional, import your voice into HeyGen" at the end of this guide.
-
-## Step 8, find your IDs
-
-In ElevenLabs, open My Voices. Copy the ID shown under your voice into `ELEVENLABS_VOICE_ID=` in `.env`.
-
-In HeyGen, open Avatars and choose your clone. Copy the ID from the address bar or details panel into `HEYGEN_AVATAR_ID=` in `.env`.
+**Leave `HEYGEN_API_KEY` empty.** You do not need it and filling it in costs you money. Your $29 HeyGen plan credits are spent by the signed-in connection from Step 7. A HeyGen API key spends a different, pay-as-you-go balance instead, roughly $1 per minute of video and sold in $5 blocks, and your plan credits would sit unused.
 
 The API key is secret. The voice ID and avatar ID are not secrets, but keep them in `.env` instead of shared files.
 
-## Step 9, connect your agent
+`.env` is plain text. It is safe enough for this starter because git ignores it, the agent never prints it, and the key is restricted. Keep the master copy in a password manager such as 1Password and treat `.env` as a working copy. You can make a new key in ElevenLabs and replace it at any time.
 
-HeyGen signs in through the plugin. ElevenLabs speech uses the key in `.env` through the included script. The only key you paste is the ElevenLabs key. You do not need a HeyGen API key. If you made an unused HeyGen key, revoke it in HeyGen. The signed-in HeyGen connection uses plan credits; a HeyGen API key or the heygen command uses separately purchased API credits.
+Once the key is saved, both the included speech script and the official `elevenlabs` command read it from this folder on their own. You never type the key again.
 
-### Codex app
+## Step 7, sign in to HeyGen once
 
-<img src="docs/screenshots/codex-new-chat-and-plugins.png" alt="Codex sidebar showing the New chat and Plugins navigation labels" width="240">
+HeyGen is the only tool that asks you to sign in, and it only asks once. Setup already registered the connection; this just proves it is you.
 
-Use **Plugins** to connect a tool, then **New chat** to start a conversation that can see it.
-
-For HeyGen: open Plugins in the Codex sidebar, search HeyGen, click + (Install); a browser page asks to connect through HeyGen MCP; Authorize access, Open ChatGPT; START A NEW CHAT; success: ask what tools you have from HeyGen and it lists them.
-
-For HyperFrames: open Plugins, search HyperFrames, click + (Install). No sign-in. The plugin adds instructions; the hyperframes command from Step 1 does the rendering and is what the desk check tests. Start a NEW chat. Success: ask what HyperFrames skills it has.
-
-For ElevenLabs speech, there is no required plugin. The project script uses the key from Step 6. Success: the desk check prints "ElevenLabs key works" and saves a short speech test.
-
-### Claude Code
-
-The folder's settings include HeyGen. If its tools are missing, run this in Terminal or PowerShell:
+**Codex.** Open Terminal and paste:
 
 ```sh
-claude mcp add --transport http heygen https://mcp.heygen.com/mcp/v1/
+codex mcp login heygen
 ```
 
-Type `/mcp` inside Claude Code and finish sign-in. If still missing, quit and reopen the folder, then paste the first START-HERE.md prompt again. Success: HeyGen tools are listed in the new chat. ElevenLabs speech uses the project script; on Windows it is `scripts/elevenlabs-speak.ps1`.
+Your browser opens, you approve, and the terminal confirms it. Success looks like: HeyGen tools are listed the next time you start a new chat.
 
-> **Optional extra, sound effects and music only**
->
-> In Codex Plugins, choose Add custom, paste `https://api.elevenlabs.io/v1/mcp`, choose OAuth, Save, then Authorize. START A NEW CHAT after sign-in. In Claude Code, the optional ElevenLabs connection is listed in the folder settings; use `/mcp` to sign in. Use these extras only when the ElevenLabs tool is listed in this chat. Speech always uses the included script. If an extra is unavailable, the agent skips it and notes that in the draft README.
+**Claude Code.** Type `/mcp` inside Claude Code and finish the sign-in there. If HeyGen is still missing, quit and reopen the folder.
 
-## Step 10, run the desk check
+That sign-in never appears in the chat that was already open. START A NEW CHAT afterwards.
+
+You do not need a HeyGen API key, and you should not make one. If you made one for an earlier version of this course, revoke it in HeyGen.
+
+## Step 8, run the desk check
 
 START A NEW CHAT and paste:
 
@@ -170,14 +135,21 @@ START A NEW CHAT and paste:
 Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet.
 ```
 
-The agent runs `bash scripts/check-setup.sh` on Mac or `scripts/check-setup.ps1` on Windows. It checks helpers and the live key without showing private values. After connecting a plugin or changing `.env`, START A NEW CHAT and paste that same prompt again.
+The agent runs `bash scripts/check-setup.sh` on Mac or `scripts/check-setup.ps1` on Windows. It checks the helpers and your live key without showing any private value, then makes a short speech test in your own voice.
+
+Your setup is finished when ElevenLabs and HyperFrames both report CONNECTED. If HeyGen reports NOT SIGNED IN, nothing is broken and you have not done anything wrong: go back to Step 7, then start a new chat. Assignments 2 and 3 run without HeyGen in the meantime.
+
+After changing `.env` or finishing a sign-in, START A NEW CHAT and paste that same prompt again.
 
 > **If something does not connect**
 >
-> - Not signed in: reopen the plugin and finish sign-in, then START A NEW CHAT and paste the first prompt from START-HERE.md again. In Claude Code, use `/mcp`, finish sign-in; if still missing, quit and reopen the folder and paste the prompt again.
+> - A helper is missing: run the setup command from Step 5 again. It is safe to repeat.
+> - HeyGen is not signed in: do Step 7, then START A NEW CHAT. A connection never shows up in the chat that was open when you signed in.
 > - Wrong plan: confirm that HeyGen and ElevenLabs show the Creator plan.
-> - Key not restricted correctly: under Developers, API keys, make a new key using the Step 5 checkbox list (Text to Speech, Speech to Text, Sound Effects, Music Generation optional) and set Voices to Read.
+> - Key not restricted correctly: under Developers, API keys, make a new key using the Step 4 checkbox list (Text to Speech, Speech to Text, Sound Effects, Music Generation optional) and set Voices to Read.
 
 ## Optional, import your voice into HeyGen (only if HeyGen refuses uploaded audio)
 
-In HeyGen, open Settings, Voices, then Import third-party voice. Paste the restricted ElevenLabs key there, choose Manage, then choose your professional voice. Do not paste the key into chat. This gives HeyGen the key's permissions: Text to Speech, Speech to Text, Sound Effects, Music Generation if selected, and Voices set to Read. You can revoke it and make a new one in ElevenLabs under Developers, API keys. Normal use uploads the script's narration and needs no import.
+Skip this for normal use. Normal use uploads the script's narration and needs no import.
+
+In HeyGen, open Settings, Voices, then Import third-party voice. Paste the restricted ElevenLabs key there, choose Manage, then choose your professional voice. Do not paste the key into chat. This gives HeyGen the key's permissions: Text to Speech, Speech to Text, Sound Effects, Music Generation if selected, and Voices set to Read. You can revoke it and make a new one in ElevenLabs under Developers, API keys.

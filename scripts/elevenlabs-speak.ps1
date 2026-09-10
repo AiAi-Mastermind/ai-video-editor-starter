@@ -6,7 +6,7 @@ $BodyFile = $null
 $ResponseFile = $null
 try {
     if (-not $TextFile -or -not $OutFile -or $args.Count -gt 0) { throw 'Use this script with a text file and an output MP3 path.' }
-    if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'Node is missing. Follow SETUP.md Step 1.' }
+    if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'Node is missing. Install Node.js, then run the setup command in SETUP.md Step 5.' }
     if (-not (Get-Command curl.exe -ErrorAction SilentlyContinue)) { throw 'The download helper curl is missing.' }
     if (-not (Test-Path -LiteralPath $TextFile -PathType Leaf)) { throw 'The speech text file is missing.' }
     if (Test-Path -LiteralPath $OutFile) { throw 'That output file already exists. Choose a new MP3 file name.' }
@@ -21,7 +21,7 @@ try {
         switch ($Parts[0]) { 'ELEVENLABS_API_KEY' { $SpeechKey = $Value }; 'ELEVENLABS_VOICE_ID' { $SpeechVoice = $Value } }
     }
     if ($SpeechKey -cnotmatch '^[A-Za-z0-9_-]+$') { throw 'Wrong or expired key. Paste the whole key again with no extra spaces' }
-    if ($SpeechVoice -cnotmatch '^[A-Za-z0-9_-]+$') { throw 'Your voice ID is missing or not accepted. Check SETUP.md Step 8.' }
+    if ($SpeechVoice -cnotmatch '^[A-Za-z0-9_-]+$') { throw 'Your voice ID is missing or not accepted. Check SETUP.md Step 6.' }
     $BodyFile = [IO.Path]::GetTempFileName()
     $ResponseFile = [IO.Path]::GetTempFileName()
     $NodeCode = @'
@@ -41,7 +41,7 @@ process.stdout.write(JSON.stringify({text, model_id:'eleven_multilingual_v2', vo
         exit 0
     }
     $FailureBody = [IO.File]::ReadAllText($ResponseFile)
-    if ($FailureBody -match 'missing_permissions') { throw 'Your key is missing a permission. Make a new key with Text to Speech enabled, see SETUP.md Step 5.' }
+    if ($FailureBody -match 'missing_permissions') { throw 'Your key is missing a permission. Make a new key with Text to Speech enabled, see SETUP.md Step 4.' }
     if ($FailureBody -match 'invalid_api_key') { throw 'Wrong or expired key. Paste the whole key again with no extra spaces' }
     if ($FailureBody -match 'quota|credit|insufficient') { throw 'Your ElevenLabs credits or quota are used up. Check your balance before trying again.' }
     throw 'ElevenLabs did not accept the speech request. Check your voice and text, then try again.'
@@ -49,16 +49,16 @@ process.stdout.write(JSON.stringify({text, model_id:'eleven_multilingual_v2', vo
     # Print only our own plain messages, never a native exception or response body.
     $SafeMessages = @(
         'Use this script with a text file and an output MP3 path.',
-        'Node is missing. Follow SETUP.md Step 1.',
+        'Node is missing. Install Node.js, then run the setup command in SETUP.md Step 5.',
         'The download helper curl is missing.',
         'The speech text file is missing.',
         'That output file already exists. Choose a new MP3 file name.',
         'Private settings are missing. Follow SETUP.md Step 6.',
         'Wrong or expired key. Paste the whole key again with no extra spaces',
-        'Your voice ID is missing or not accepted. Check SETUP.md Step 8.',
+        'Your voice ID is missing or not accepted. Check SETUP.md Step 6.',
         'The speech text could not be read.',
         'ElevenLabs could not be reached. Try again when your connection is working.',
-        'Your key is missing a permission. Make a new key with Text to Speech enabled, see SETUP.md Step 5.',
+        'Your key is missing a permission. Make a new key with Text to Speech enabled, see SETUP.md Step 4.',
         'Your ElevenLabs credits or quota are used up. Check your balance before trying again.',
         'ElevenLabs did not accept the speech request. Check your voice and text, then try again.'
     )

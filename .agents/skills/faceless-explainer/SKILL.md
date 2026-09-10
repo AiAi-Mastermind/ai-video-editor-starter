@@ -30,12 +30,12 @@ For repeated speech tests, keep each earlier file: use `test-voice-v2.mp3`, then
 
 For new work, reserve a fresh draft folder. If it exists, add `-2`, then `-3` until creation succeeds. Use that chosen path in every command below. Revisions use the existing folder.
 
-Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection.
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HyperFrames is CONNECTED when `hyperframes --version` prints a version. HeyGen is CONNECTED when HeyGen tools are listed in this chat, and NOT SIGNED IN when they are not. A missing HeyGen sign-in is a normal first-run state, never a failure and never the member's fault. Stop only for a tool the named assignment requires. Review and brand-kit work require no connection. If a helper is missing entirely, give one command, `bash scripts/bootstrap.sh` (Windows: `scripts/bootstrap.ps1`), and never send the member to a Plugins sidebar.
 
 1. Complete the READ and CHECK phases in `AGENTS.md`.
 2. If the member requested the sample brief, use `brand/sample-brand-kit.md` and skip the interview. Otherwise, run the brand interview if any `[FILL]` marker remains.
 3. Run `bash scripts/check-setup.sh`.
-4. ElevenLabs is connected when this run printed "ElevenLabs key works". Run `hyperframes --version`. Stop only if the key check failed or HyperFrames is missing; explain the matching SETUP.md step. Never require an ElevenLabs chat tool for speech.
+4. ElevenLabs is connected when this run printed "ElevenLabs key works". Run `hyperframes --version`. Stop only if the key check failed or HyperFrames is missing; give `bash scripts/bootstrap.sh` and the matching SETUP.md step. Never require anything beyond the key for speech.
 5. Treat HeyGen as optional and do not stop when it is unavailable.
 6. Read the supplied page text or topic notes.
 7. If a page is unavailable, ask for pasted text and stop until it arrives.
@@ -59,10 +59,10 @@ Decide connections from THIS chat only, never from another chat's README. Eleven
 25. On Windows use `scripts/elevenlabs-speak.ps1` with the same two paths; verify the saved test.
 26. Check pronunciation, pace, and tone before continuing.
 27. Write the full plain spoken narration to `narration.txt`. Run `bash scripts/elevenlabs-speak.sh <draft>/narration.txt <draft>/narration.mp3` without a permission question.
-28. On Windows use `scripts/elevenlabs-speak.ps1` with the same paths. Read Background music from the active brand kit. For light or upbeat, only when the ElevenLabs chat tool is listed and offers music, generate one instrumental bed for the full video including the end card, save `music.mp3`, and include its cost in the estimate before generation. If the tool is absent, skip and write "no music, ElevenLabs tool not in this chat" in the README. For none, skip and note the brand preference. If music permission is missing, skip gracefully and record that reason. Use about -18 dB under speech and fade during the end card.
+28. On Windows use `scripts/elevenlabs-speak.ps1` with the same paths. Read Background music from the active brand kit. For light or upbeat, generate one instrumental bed for the full video including the end card with `elevenlabs music`, save `music.mp3`, and include its cost in the estimate before generation. The command reads the key from `.env` on its own; never pass the key on the command line. If the `elevenlabs` command is missing, skip, write "no music, run bash scripts/bootstrap.sh to install the elevenlabs command" in the README, and carry on. For none, skip and note the brand preference. If music permission is missing, skip gracefully and record that reason. Use about -18 dB under speech and fade during the end card.
 29. Ask once whether a light whoosh is wanted.
 30. Default to no sound effect.
-31. If wanted and the ElevenLabs chat tool is listed, make one original whoosh with it. Otherwise skip and note the missing tool in the README.
+31. If wanted, make one original whoosh with `elevenlabs text-to-sound-effects`. If that command is missing, skip and note it in the README.
 32. Save it as `whoosh.mp3`.
 33. Author the composition as `index.html` in the draft folder, editing the file that `hyperframes init` created. Set its initial size to 16:9.
 34. Make every scene a full-frame card.
@@ -83,7 +83,7 @@ Decide connections from THIS chat only, never from another chat's README. Eleven
 
 # Revise
 
-Use the named draft folder. Do not re-init. Keep narration and the avatar source unless the words or requested delivery change. Change only what the member requested. For new images, use Codex built-in image generation and save `image-01.png`, `image-02.png`, and so on in the draft folder. In Claude Code, ask the member to make the images in ChatGPT and drop them into the folder. Use subtle HyperFrames keyframe motion. Sound effects use the listed ElevenLabs chat tool and save as `sfx-<name>.mp3`; otherwise skip and note why. Music comes from a licensed member file or the listed ElevenLabs chat tool if it offers music. Reuse existing audio where possible. Estimate new credits before generation and keep the normal short-test rules for changed speech or avatars. Re-lint, check, and render with a `-v2` suffix, then `-v3`, preserving earlier renders. Inspect both sizes and update the README with changes, files, skipped extras, and credits.
+Use the named draft folder. Do not re-init. Keep narration and the avatar source unless the words or requested delivery change. Change only what the member requested. For new images, use Codex built-in image generation and save `image-01.png`, `image-02.png`, and so on in the draft folder. In Claude Code, ask the member to make the images in ChatGPT and drop them into the folder. Use subtle HyperFrames keyframe motion. Sound effects use `elevenlabs text-to-sound-effects` and save as `sfx-<name>.mp3`; if that command is missing, skip and note why. Music comes from a licensed member file or `elevenlabs music`. Reuse existing audio where possible. Estimate new credits before generation and keep the normal short-test rules for changed speech or avatars. Re-lint, check, and render with a `-v2` suffix, then `-v3`, preserving earlier renders. Inspect both sizes and update the README with changes, files, skipped extras, and credits.
 
 # Outputs
 

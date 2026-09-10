@@ -5,7 +5,7 @@ set +x
 set -euo pipefail
 fail() { printf '%s\n' "$1"; exit 1; }
 [ "$#" -eq 2 ] || fail 'Use this script with a text file and an output MP3 path.'
-command -v node >/dev/null 2>&1 || fail 'Node is missing. Follow SETUP.md Step 1.'
+command -v node >/dev/null 2>&1 || fail 'Node is missing. Install Node.js, then run the setup command in SETUP.md Step 5.'
 command -v curl >/dev/null 2>&1 || fail 'The download helper curl is missing.'
 project_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 [ -r "$1" ] && [ -s "$1" ] || fail 'The speech text file is missing or empty.'
@@ -24,7 +24,7 @@ while IFS='=' read -r setting value || [ -n "${setting:-}" ]; do
 done < "$project_dir/.env"
 # Allow only token characters so curl configuration cannot be injected.
 [[ "$speech_key" =~ ^[A-Za-z0-9_-]+$ ]] || fail 'Wrong or expired key. Paste the whole key again with no extra spaces'
-[[ "$speech_voice" =~ ^[A-Za-z0-9_-]+$ ]] || fail 'Your voice ID is missing or not accepted. Check SETUP.md Step 8.'
+[[ "$speech_voice" =~ ^[A-Za-z0-9_-]+$ ]] || fail 'Your voice ID is missing or not accepted. Check SETUP.md Step 6.'
 umask 077
 speech_body="$(mktemp)" || fail 'Could not prepare the speech request.'
 speech_response="$(mktemp)" || { rm -f "$speech_body"; fail 'Could not prepare the speech request.'; }
@@ -45,7 +45,7 @@ if [ "$speech_status" = 200 ] && [ -s "$speech_response" ]; then
   exit 0
 fi
 if LC_ALL=C grep -q 'missing_permissions' "$speech_response"; then
-  fail 'Your key is missing a permission. Make a new key with Text to Speech enabled, see SETUP.md Step 5.'
+  fail 'Your key is missing a permission. Make a new key with Text to Speech enabled, see SETUP.md Step 4.'
 elif LC_ALL=C grep -q 'invalid_api_key' "$speech_response"; then
   fail 'Wrong or expired key. Paste the whole key again with no extra spaces'
 elif LC_ALL=C grep -qiE 'quota|credit|insufficient' "$speech_response"; then

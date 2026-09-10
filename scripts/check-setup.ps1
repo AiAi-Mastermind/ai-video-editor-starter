@@ -3,6 +3,7 @@ Set-PSDebug -Off
 $LocalElevenLabsKey = ""
 $ProjectDir = Split-Path -Parent $PSScriptRoot
 $EnvFile = Join-Path $ProjectDir ".env"
+$LocalHeyGenKey = ""
 $ExpectedNames = @(
     "ELEVENLABS_API_KEY",
     "ELEVENLABS_VOICE_ID",
@@ -25,6 +26,7 @@ if (Test-Path $EnvFile) {
             $Value = $_.Substring($Separator + 1)
             if ($Value.Length -ge 2 -and (($Value.StartsWith('"') -and $Value.EndsWith('"')) -or ($Value.StartsWith("'") -and $Value.EndsWith("'")))) { $Value = $Value.Substring(1, $Value.Length - 2) }
             if ($Name -eq 'ELEVENLABS_API_KEY') { $LocalElevenLabsKey = $Value }
+            if ($Name -eq 'HEYGEN_API_KEY') { $LocalHeyGenKey = $Value }
             if ($PresentNames.ContainsKey($Name) -and -not [string]::IsNullOrWhiteSpace($Value)) {
                 $PresentNames[$Name] = $true
             }
@@ -47,6 +49,8 @@ Test-Command "node" "node"
 Test-Command "npm" "npm"
 Test-Command "ffmpeg" "ffmpeg"
 Test-Command "hyperframes" "hyperframes"
+Test-Command "elevenlabs" "elevenlabs command"
+Test-Command "codex" "codex command (optional)"
 Test-Command "whisper" "whisper (optional)"
 
 foreach ($Name in $ExpectedNames) {
@@ -55,6 +59,32 @@ foreach ($Name in $ExpectedNames) {
     } else {
         Write-Output "${Name}: MISSING"
     }
+}
+
+Write-Output "HeyGen registration"
+
+$McpFile = Join-Path $ProjectDir ".mcp.json"
+if ((Test-Path $McpFile) -and ((Get-Content $McpFile -Raw) -match 'mcp\.heygen\.com')) {
+    Write-Output "HeyGen in this folder's settings: FOUND"
+} else {
+    Write-Output "HeyGen in this folder's settings: MISSING"
+}
+
+if (Get-Command codex -ErrorAction SilentlyContinue) {
+    & codex mcp get heygen *> $null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Output "HeyGen registered with Codex: FOUND (sign in once with: codex mcp login heygen)"
+    } else {
+        Write-Output "HeyGen registered with Codex: MISSING (run: scripts/bootstrap.ps1)"
+    }
+} else {
+    Write-Output "HeyGen registered with Codex: NOT CHECKED (the codex command is not on this computer)"
+}
+
+if ($LocalHeyGenKey) {
+    Write-Output "HEYGEN_API_KEY: PRESENT (this spends paid API credits, not your plan credits; leave it empty unless you meant to buy them)"
+} else {
+    Write-Output "HEYGEN_API_KEY: EMPTY (correct for almost everyone)"
 }
 
 if ($env:CHECK_SETUP_OFFLINE -eq '1') {
@@ -85,12 +115,13 @@ if ($env:CHECK_SETUP_OFFLINE -eq '1') {
         }
         if ($Status -eq 200) { Write-Output 'ElevenLabs key works' }
         elseif ($Status -eq 401 -or $Status -eq 403) {
-            if ($ResponseBody -match 'missing_permissions') { Write-Output 'Your key is missing a permission. Make a new key with Voices set to Read, see SETUP.md Step 5' }
+            if ($ResponseBody -match 'missing_permissions') { Write-Output 'Your key is missing a permission. Make a new key with Voices set to Read, see SETUP.md Step 4' }
             elseif ($ResponseBody -match 'invalid_api_key') { Write-Output 'Wrong or expired key. Paste the whole key again with no extra spaces' }
             else { Write-Output 'ElevenLabs rejected the key' }
         } else { Write-Output 'ElevenLabs could not be reached' }
     }
 } else { Write-Output 'ElevenLabs key check: SKIPPED' }
-Write-Output 'If the line above says ElevenLabs key works, ElevenLabs is connected even when its plugin is not in this chat.'
-Write-Output 'The HeyGen connection and ElevenLabs speech are tested by the desk-check skill.'
+Write-Output 'If the line above says ElevenLabs key works, ElevenLabs is connected. No plugin is involved.'
+Write-Output 'HeyGen needs a one-time sign-in. It is not part of your key setup and it does not make this check fail.'
+Write-Output 'The HeyGen sign-in and the ElevenLabs speech test are checked by the desk-check skill.'
 exit 0

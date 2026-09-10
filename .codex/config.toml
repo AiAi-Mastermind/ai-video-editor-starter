@@ -1,13 +1,10 @@
 # Codex settings for this folder.
-# In the app, connect HeyGen in Plugins and install the HyperFrames instructions plugin.
+# Setup registers HeyGen for you by running scripts/bootstrap.sh. You never click a plugin.
+# HyperFrames is the hyperframes command plus the instructions that bootstrap installs.
 # Speech uses scripts/elevenlabs-speak.sh and the private key in .env.
-# The optional ElevenLabs chat connection below is for extras, such as music and sound effects.
-# Start a new chat after connecting a plugin. No key is stored in this file.
+# The elevenlabs command handles sound effects, music and transcription from the same key.
+# Start a new chat after setup finishes. No key is stored in this file.
 
 [mcp_servers.heygen]
-# Your HeyGen video clone. Sign in with your HeyGen account when asked.
+# Your HeyGen video clone. Sign in once with: codex mcp login heygen
 url = "https://mcp.heygen.com/mcp/v1/"
-
-[mcp_servers.elevenlabs]
-# Optional sound effects, music and transcription. Speech always uses the project script.
-url = "https://api.elevenlabs.io/v1/mcp"

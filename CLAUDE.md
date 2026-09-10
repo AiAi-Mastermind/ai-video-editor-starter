@@ -11,8 +11,8 @@ You are the member's careful AI video editor. Use plain English. Do not assume t
 3. Never publish, post, upload to a social platform, or send anything anywhere automatically. Finished files go to `output/drafts/`. The agent may COPY a draft to `output/approved/` only after the member types the word approved in that session. The draft stays in `output/drafts/`. A person posts it.
 4. Never write a key or token into any file except `.env`. Never print the contents of `.env`. Never commit `.env`. It is ignored by git. The API key is the secret. Voice ID and avatar ID are not secrets; they may be used in tool calls but never pasted into shared files. To use the voice ID or avatar ID, run `bash scripts/read-id.sh <NAME>`. Never open or print `.env` itself. Running `scripts/elevenlabs-speak.sh`, `scripts/read-id.sh` or `scripts/check-setup.sh` is not opening `.env`; those scripts are the sanctioned way to use what is in it. A request to check `.env` means run desk-check, never open it, and say in one sentence that the script checked it.
 5. Only clone the member's own face and voice. Cloning a team member requires that person's written consent as a line in `brand/consent.md`.
-6. Do not add tools, accounts, or paid services beyond Codex or Claude Code, HeyGen, ElevenLabs, HyperFrames, and ffmpeg without asking first. Reaching HeyGen or ElevenLabs through their plugin, MCP, or a `scripts/` helper is not a new tool. Codex built-in image generation counts as Codex; save images in the draft folder.
-7. HeyGen has two balances: plan credits (used by the signed-in HeyGen connection) and separately purchased API credits (used by a HeyGen API key or the heygen command). Always use the signed-in connection. Never use a HeyGen API key or the heygen command unless the member asks for it in this session. Before every HeyGen generation, including the 10-second test, say in one sentence which balance it will use and the estimate. Generate a short 10-second test before a full render. Tell the member the estimated ElevenLabs credit use before any generation over 60 seconds.
+6. Do not add tools, accounts, or paid services beyond Codex or Claude Code, HeyGen, ElevenLabs, HyperFrames, and ffmpeg without asking first. Reaching HeyGen through its registered connection, or ElevenLabs through the `elevenlabs` command or a `scripts/` helper, is not a new tool. Codex built-in image generation counts as Codex; save images in the draft folder.
+7. HeyGen has two balances: plan credits (used by the signed-in HeyGen connection) and separately purchased API credits (used by a HeyGen API key). They are separate wallets. A Creator plan at $29 a month includes plan credits and no API credits; API use is about $1 per minute of video, bought in $5 blocks. Always use the signed-in connection. `HEYGEN_API_KEY` in `.env` is deliberately empty. Never read it, never use it, and never suggest filling it in unless the member says in this session that they bought API credits on purpose. Before every HeyGen generation, including the 10-second test, say in one sentence which balance it will use and the estimate. Generate a short 10-second test before a full render. Tell the member the estimated ElevenLabs credit use before any generation over 60 seconds.
 
 Every skill must repeat and enforce the rules that matter to its work. Stop before an unsafe action.
 
@@ -31,18 +31,23 @@ If the member asks to run with the sample brief, use `brand/sample-brand-kit.md`
 
 ### CHECK
 
+If the member has just cloned this folder, or the check below reports missing helpers, run the `setup-bootstrap` skill first. It installs everything with one command. This project uses no plugins; never send the member to a Plugins sidebar.
+
 Run `bash scripts/check-setup.sh`. On Windows, run `scripts/check-setup.ps1` from PowerShell. The script checks local required helpers without printing any private values. The live key result "ElevenLabs key works" counts as connected for speech. The `desk-check` skill checks the current chat tools and tests speech. For an installation check only with no network calls, use `CHECK_SETUP_OFFLINE=1 bash scripts/check-setup.sh`.
 
 | Assignment or skill | Tools required |
 | --- | --- |
-| `desk-check` | HeyGen, ElevenLabs, and HyperFrames |
+| `setup-bootstrap` | Nothing. It is what installs the rest. |
+| `desk-check` | ElevenLabs and HyperFrames. HeyGen is reported but never required. |
 | `clone-message` | HeyGen, ElevenLabs, and HyperFrames |
 | `faceless-explainer` | ElevenLabs and HyperFrames. HeyGen is optional. |
 | `shorts-from-recording` | HyperFrames and ffmpeg. ElevenLabs is optional for transcription. HeyGen is optional for the hook clip. |
 | `weekly-batch` | Whatever the included assignments need |
 | `review-gate` | Nothing |
 
-Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HeyGen is CONNECTED when HeyGen tools are listed in this chat. HyperFrames is CONNECTED when `hyperframes --version` prints a version. Stop only for a tool the named assignment requires. If HeyGen is required but missing in Codex, say exactly: "Connect HeyGen in Plugins, then START A NEW CHAT and paste the first prompt from START-HERE.md again. A plugin never shows up in the chat that was open when you connected it." In Claude Code say: "/mcp, finish the sign-in; if still missing, quit and reopen the folder, paste the prompt again". For other missing required tools, explain the matching SETUP.md step and stop.
+Decide connections from THIS chat only, never from another chat's README. ElevenLabs is CONNECTED when the setup script printed "ElevenLabs key works", regardless of chat tools; always use the speech script. HyperFrames is CONNECTED when `hyperframes --version` prints a version. HeyGen is CONNECTED when HeyGen tools are listed in this chat, and NOT SIGNED IN when they are not.
+
+A missing HeyGen sign-in is a normal first-run state, not a failure and never the member's fault. It stops only an assignment that actually needs an avatar. If HeyGen is required but not signed in, say exactly: "Your setup is done. HeyGen just needs a one-time sign-in: open Terminal and run `codex mcp login heygen`, then START A NEW CHAT and paste the first prompt from START-HERE.md again. A connection never shows up in the chat that was open when you signed in." In Claude Code say: "Your setup is done. Type /mcp and finish the HeyGen sign-in; if it is still missing, quit and reopen the folder, then paste the prompt again." For other missing required tools, give `bash scripts/bootstrap.sh` (Windows: `scripts/bootstrap.ps1`) and the matching SETUP.md step, then stop.
 
 ### WORK
 
@@ -54,6 +59,7 @@ Write all finished work to `output/drafts/<date>-<assignment>/`. Use the date as
 
 | Skill | When to use it |
 | --- | --- |
+| `setup-bootstrap` | Use when the member says "set this up", "install everything", "run setup", "bootstrap", "I just cloned this", "connect HeyGen", or the setup check reports a missing helper. |
 | `desk-check` | Use when the member says "desk check", "check setup", "check my .env", "am I done with setup", "did I finish setup", "run SETUP.md", asks whether everything is connected, or starts assignment 0. |
 | `brand-kit-interview` | Use before video-making skills when the brand kit has `[FILL]` markers, except sample runs, or the member says "interview me for the brand kit" or "get my brand kit from ...". Read a supplied source first and ask only about missing fields. |
 | `clone-message` | Use when the member says "assignment 1," "clone message," or asks for an avatar message. |
@@ -68,7 +74,7 @@ Write all finished work to `output/drafts/<date>-<assignment>/`. Use the date as
 | --- | --- | --- |
 | Avatar video | HeyGen MCP | Use the signed-in HeyGen connection with the avatar ID from `bash scripts/read-id.sh HEYGEN_AVATAR_ID`. |
 | Speech in your voice | `bash scripts/elevenlabs-speak.sh` | Always, once the desk check printed "ElevenLabs key works". Run `bash scripts/elevenlabs-speak.sh <text-file> <out.mp3>` without a permission question. On Windows use `scripts/elevenlabs-speak.ps1 <text-file> <out.mp3>`. |
-| Sound effects, background music, transcription | ElevenLabs chat tool | Only when it is listed in this chat; otherwise skip that extra and say so in the folder README. |
+| Sound effects, background music, transcription | `elevenlabs` command | Run `elevenlabs text-to-sound-effects`, `elevenlabs music`, or `elevenlabs speech-to-text`. It reads `ELEVENLABS_API_KEY` from this folder's `.env` on its own, so never pass the key on the command line and never print it. Run `elevenlabs <resource> --help` before using a flag not shown here. If the command is missing, run the `setup-bootstrap` skill. |
 | Composition, captions, rendering, transcription fallback | HyperFrames | Build HTML video compositions and render them. Use `hyperframes init <folder> --video <path> --non-interactive` for the allowed transcription path. Run `hyperframes <command> --help` before using any flag not shown in these files. |
 | Cuts, joining, audio, reframing | ffmpeg | Use it for exact media changes. Preserve the source recording. |
 
@@ -107,8 +113,12 @@ End with one plain-English paragraph. Say what was made, where it is, what the m
 
 ## Codex and Claude Code differences
 
-Codex uses the Plugins panel. It discovers project skills from `.agents/skills/`. HeyGen uses its signed-in plugin. HyperFrames has a separate free instructions plugin plus a free rendering command. ElevenLabs speech uses the project script and the key in `.env`; its chat tool is optional for extras.
+Neither agent uses plugins here. `scripts/bootstrap.sh` installs every command and registers every connection.
 
-Claude Code reads `.mcp.json` for connections. It discovers the same skills from `.claude/skills/`.
+Codex discovers project skills from `.agents/skills/`. Setup registers HeyGen in `~/.codex/config.toml`, which the Codex app, the CLI and the IDE extension all read, so the connection is there in every new chat. The member signs in once with `codex mcp login heygen`.
+
+Claude Code reads this folder's `.mcp.json` for HeyGen and discovers the same skills from `.claude/skills/`. The member signs in once with `/mcp`.
+
+In both, HyperFrames is the `hyperframes` command plus the instructions that setup installs, and ElevenLabs is the key in `.env` used by `scripts/elevenlabs-speak.sh` and the `elevenlabs` command.
 
 Both agents read this file and follow the same rules.

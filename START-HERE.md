@@ -1,28 +1,46 @@
 # Start Here
 
-Step 0. Have you finished SETUP.md? It installs the helpers, sets up your accounts, fills in your private settings, and connects HeyGen, ElevenLabs and HyperFrames. If not, do that first. When it is done, START A NEW CHAT in Codex or Claude Code, then paste this:
+## Step 0, set up the folder
+
+Just cloned this? Paste this into the chat:
 
 ```text
-Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet.
+Read AGENTS.md, then run the setup for me.
 ```
 
-Keep the default Codex model and set reasoning to Medium. Medium is enough for every video assignment, including HyperFrames builds. Use Low or the cheapest model for the desk check, brand-kit interview, and draft reviews. Use High only after the same render fails twice.
+One command installs ffmpeg, HyperFrames, the official `elevenlabs` command, and your `.env` file, and registers your HeyGen connection. There are no plugins to find and nothing to click. It is safe to run again at any time.
 
-If you still need the private settings file, use this prompt as part of SETUP.md Step 6, then open the file yourself as that step explains:
+When it finishes it prints a short list of what is left for you. That list is normally two things: paste three values into `.env` yourself, and sign in to HeyGen once with `codex mcp login heygen` (in Claude Code, type `/mcp`). `SETUP.md` walks through the accounts, the voice clone, the avatar clone and the ElevenLabs key.
+
+If you only need the private settings file, use this prompt as part of SETUP.md Step 6, then open the file yourself as that step explains:
 
 ```text
 Copy .env.example to .env in this folder. Do not open it, read it, or show its contents. Tell me when it exists.
 ```
 
-When all three tools are CONNECTED, choose a route.
+## Step 1, check what is connected
 
-## Route A, try the sample
+START A NEW CHAT, then paste:
+
+```text
+Read AGENTS.md. Then run the desk check and tell me in plain English what is connected and what is not. Do not make any video yet.
+```
+
+A connection never shows up in the chat that was open when you made it, so the new chat matters.
+
+You are ready when ElevenLabs and HyperFrames say CONNECTED. If HeyGen says NOT SIGNED IN, nothing is broken and you have not done anything wrong. Run `codex mcp login heygen`, start a new chat, and check again. Assignments 2 and 3 work without HeyGen in the meantime.
+
+Keep the default Codex model and set reasoning to Medium. Medium is enough for every video assignment, including HyperFrames builds. Use Low or the cheapest model for the desk check, brand-kit interview, and draft reviews. Use High only after the same render fails twice.
+
+## Step 2, choose a route
+
+### Route A, try the sample
 
 ```text
 Run assignment 1 with the sample brief.
 ```
 
-## Route B, use your business
+### Route B, use your business
 
 ```text
 Fill in brand/brand-kit.md from <a file, a folder, or your website address>, ask me only about what is still missing, then run assignment 1.
